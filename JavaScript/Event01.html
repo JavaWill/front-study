@@ -7,6 +7,33 @@
     <title>Document</title>
 </head>
 <body>
-    This is event
+    选择字号：
+    <select id="fontSize">
+        <option value="10px">10</option>
+        <option value="20px">20</option>
+        <option value="30px">30</option>
+    </select>px
+    <p id="font">text</p>
+    <script>
+        document.getElementById("fontSize").onchange = function(){
+            document.getElementById("font").style.fontSize = 
+            document.getElementById("fontSize").value;
+        }
+    </script>
+    输入：<input id="input" value="请输入"/>
+    <span id="span"></span>
+    <script>
+        document.getElementById("input").onfocus = function(){
+            if(document.getElementById("input").value === "请输入"){
+                document.getElementById("input").value = "";
+            }
+        }
+        document.getElementById("input").onblur = function(){
+            var inputValue = document.getElementById("input").value;
+            if(inputValue === ""){
+                document.getElementById("input").value = "请输入";
+            }
+        }
+    </script>
 </body>
 </html>
