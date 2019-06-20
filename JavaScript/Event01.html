@@ -15,6 +15,8 @@
     </select>px
     <p id="font">text</p>
     <script>
+        var defaultValue = document.getElementById("fontSize").value;
+        // document.getElementById("font").style.fontSize = defaultValue;
         document.getElementById("fontSize").onchange = function(){
             document.getElementById("font").style.fontSize = 
             document.getElementById("fontSize").value;
@@ -30,7 +32,6 @@
     </div>
     <script>
         var pList = document.getElementById("pList").getElementsByTagName("p");
-        console.log(pList);
         var colorArr = ["#e68383","#2cb7aa"];
         for(let i = 0; i < pList.length; i++){
             var p = pList[i];
