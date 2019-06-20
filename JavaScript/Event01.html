@@ -55,16 +55,28 @@
     <hr>
     <div id="imgF">
         <img num="1" src="img/1.jpg" style="width:200px;height:200px">
-        onmouseenter不支持事件冒泡，onmousemove和onmouseover支持
+        ==
+        <!-- onmouseenter和onmouseleave不支持事件冒泡，onmousemove和onmouseover和onmouseout支持 -->
+        ==
         <img num="1" src="img/1.jpg" style="width:200px;height:200px">
     </div>
     <script>
         var imgF = document.querySelector("#imgF");
         imgF.onmouseover = function(){
+            // console.log("onmouseover");
             switchImg(document.getElementsByTagName("img")[0]);
         }
+        imgF.onmouseout = function(){
+            // console.log("onmouseout");
+            // switchImg(document.getElementsByTagName("img")[0]);
+        }
         imgF.onmouseenter = function(){
+            // console.log("onmouseenter");
             switchImg(document.getElementsByTagName("img")[1]);
+        }
+        imgF.onmouseleave = function(){
+            // console.log("onmouseleave");
+            // switchImg(document.getElementsByTagName("img")[1]);
         }
         function switchImg(el){
             var num = el.getAttribute("num"); // num不是自带属性，不能点获取
