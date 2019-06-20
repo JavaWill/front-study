@@ -29,22 +29,51 @@
         <p>第三行</p>
         <p>第四行</p>
         <p>第五行</p>
+        <h4></h4>
     </div>
     <script>
         var pList = document.getElementById("pList").getElementsByTagName("p");
         var colorArr = ["#e68383","#2cb7aa"];
         for(let i = 0; i < pList.length; i++){
             var p = pList[i];
-            p.onmouseover = function(){
+            p.onmouseenter = function(){
                 this.style.color = colorArr[i%2];
             }
-            p.onmouseout = function(){
+            p.onmouseleave = function(){
                 this.style.color = "black";
+            }
+        }
+        document.getElementById("pList").onmousemove = function(){
+            var h4 = document.getElementsByTagName("h4")[0];
+            if(h4.innerText.length > 60){
+                h4.innerText = "+";
+            } else {
+                h4.innerText += "+";
             }
         }
     </script>
     <hr>
-
+    <div id="imgF">
+        <img num="1" src="img/1.jpg" style="width:200px;height:200px">
+        onmouseenter不支持事件冒泡，onmousemove和onmouseover支持
+        <img num="1" src="img/1.jpg" style="width:200px;height:200px">
+    </div>
+    <script>
+        var imgF = document.querySelector("#imgF");
+        imgF.onmouseover = function(){
+            switchImg(document.getElementsByTagName("img")[0]);
+        }
+        imgF.onmouseenter = function(){
+            switchImg(document.getElementsByTagName("img")[1]);
+        }
+        function switchImg(el){
+            var num = el.getAttribute("num"); // num不是自带属性，不能点获取
+            switch(num){
+                case "1": el.src = "img/2.jpg";el.setAttribute("num","2");break;
+                case "2": el.src = "img/1.jpg";el.setAttribute("num","1");break;
+            }
+        }
+    </script>
     <hr>
     输入：<input id="input" value="请输入"/>
     <span id="span"></span>
