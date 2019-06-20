@@ -20,7 +20,8 @@
             document.getElementById("fontSize").value;
         }
     </script>
-    <div id="p">
+    <hr>
+    <div id="pList">
         <p>第一行</p>
         <p>第二行</p>
         <p>第三行</p>
@@ -28,8 +29,22 @@
         <p>第五行</p>
     </div>
     <script>
-        
+        var pList = document.getElementById("pList").getElementsByTagName("p");
+        console.log(pList);
+        var colorArr = ["#e68383","#2cb7aa"];
+        for(let i = 0; i < pList.length; i++){
+            var p = pList[i];
+            p.onmouseover = function(){
+                this.style.color = colorArr[i%2];
+            }
+            p.onmouseout = function(){
+                this.style.color = "black";
+            }
+        }
     </script>
+    <hr>
+
+    <hr>
     输入：<input id="input" value="请输入"/>
     <span id="span"></span>
     <script>
