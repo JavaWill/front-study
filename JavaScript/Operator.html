@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = 10;
+        var b = 20;
+        console.log(a+b); // 30
+        var c = 5;
+        var d = "40";
+        console.log(c+d); // 540
+        console.log(d+c); // 405
+        console.log(c-d); // -35
+        console.log(d-c); // 35
+        console.log("40"-"30w"); // NaN 说明string转number使用的是Number()方法
+        console.log("40"-true); // 39
+        console.log("40"*2); // 80
+        console.log("40"/2); // 20
+        console.log("40"/3); // 13.333333333333334
+        var num1 = 1;
+        var num2 = 1;
+        num2 = ++num1;
+        console.log(num1 + "--" + num2); // 2--2
+        num2 = num1++;
+        console.log(num1 + "--" + num2); // 3--2
+        console.log(12%2); // 0
+        console.log(12%5); // 2
+        console.log(12%5.4); // 1.1999999999999993
+        console.log(10.9%5); // 0.9000000000000004
+        console.log(10.8%5.4); // 0
+    </script>
+</body>
+</html>

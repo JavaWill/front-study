@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var n = 20; // 0 -1 1.2 NaN
+        var s = "ww"; // "" ''
+        var b = true; // true false
+        var u;
+        var nu = null;
+        console.log(typeof n); // number
+        console.log(typeof s); // string
+        console.log(typeof b); // boolean
+        console.log(typeof u); // undefined
+        console.log(typeof nu); // object
+        // parseInt() string => int
+        console.log("--------------------");
+        console.log(parseInt("11")); // 11
+        console.log(parseInt("11www222")); // 11
+        console.log(parseInt("ww11")); // NaN
+        console.log(parseInt("22.33")); // 22
+        console.log(parseInt(true)); // NaN
+        console.log(typeof NaN); // number
+        // parseFloat() string => float
+        console.log("--------------------");
+        console.log(parseFloat("11")); // 11
+        console.log(parseFloat("11.12www222")); // 11.12
+        console.log(parseFloat("ww11")); // NaN
+        console.log(parseFloat("22.33")); // 22.33
+        console.log(parseFloat(true)); // NaN
+        // Number() string => int/float
+        console.log("--------------------");
+        console.log(Number("11")); // 11
+        console.log(Number("11.12www222")); // NaN
+        console.log(Number("ww11")); // NaN
+        console.log(Number("22.33")); // 22.33
+        console.log(Number(false)); // 0
+        console.log(Number(true)); // 1
+        // Boolean() ""/0/NaN/undefined => false
+        console.log("--------------------");
+        console.log(Boolean("aaa")); // true
+        console.log(Boolean("")); // false
+        console.log(Boolean("12ww11")); // true
+        console.log(Boolean("-1")); // true
+        console.log(Boolean("0")); // true
+        console.log(Boolean(12)); // true
+        console.log(Boolean(-1)); // true
+        console.log(Boolean(0)); // false
+        console.log(Boolean(null)); // false
+        console.log(Boolean(undefined)); // false
+        // toString() number/boolean => string
+        console.log("--------------------");
+        var a_1 = 22;
+        console.log(a_1.toString()); // 22
+        console.log(a_1.toString(2)); // 10110
+        console.log(a_1.toString(8)); // 26
+        var a_2 = true;
+        console.log(a_2.toString(16)); // true
+    </script>
+</body>
+</html>

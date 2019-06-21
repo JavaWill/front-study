@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(10<20); // true
+        console.log("------------------");
+        console.log(10<"20"); // true
+        console.log("10"<2); // false 10>2
+        console.log("------------------");
+        console.log("10"<"2"); // true "1"<"2"
+        console.log("aee">"b"); // false "a"<"b"
+        console.log("aee">"1"); // true "a">"1"
+        console.log("------------------");
+        console.log("aee">1); // false NaN无论怎么比较都是false
+        console.log("aee"<1); // false
+        console.log("------------------");
+        console.log(5 == "5"); // true
+        console.log(5 === "5"); // false
+        console.log(5 != "5"); // false
+        console.log(5 !== "5"); // true
+    </script>
+</body>
+</html>

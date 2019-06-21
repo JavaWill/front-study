@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(10>3 && 10>4); // true = true && true
+        console.log(10>3 && 10>11); // false = true && false
+        console.log(10>12 && 10>11); // false = false && false
+        console.log(10>2 && 0); // 0 = true && 表达式false
+        console.log(10>2 && 1); // 1 = true && 表达式true
+        console.log(10>11 && 0); // false = false && 表达式false
+        console.log(10>11 && 1); // false = false && 表达式true
+        console.log(0 && 12); // 0 = 表达式false && 表达式true
+        console.log(1 && 0); // 0 = 表达式true && 表达式false
+        console.log("-------------------");
+        var i = 5;
+        console.log(0 && ++i); // 0 短路
+        console.log(i); // 5
+        console.log(1 && i++); // 5
+        console.log(i); // 6
+        console.log(1 && ++i); // 7
+        console.log(i); // 7
+        console.log("-------------------");
+        console.log(0 || ++i); // 8
+        console.log(i); // 8
+        console.log(1 || i++); // 1
+        console.log(i); // 8
+        console.log(1 < 2 || 34); // true
+        console.log(1 > 2 || 34); // 34
+        console.log(34 || 1 < 2); // 34
+        console.log(0 || 1 < 2); // true
+        console.log("-------------------");
+        console.log(!5>6); // false false > 6 => 0 > 6 => false
+        console.log(!(5>6)); // true
+        console.log("-------------------");
+        console.log(2 < 3 ? 1 : 2); // 1
+        var num = 120;
+        console.log((num++,++num)); // 122
+    </script>
+</body>
+</html>
