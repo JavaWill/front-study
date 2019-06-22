@@ -10,15 +10,20 @@
     <script>
         console.log(10<20); // true
         console.log("------------------");
-        console.log(10<"20"); // true
+        console.log(10<"20"); // true string -> number
+        console.log(10<"20ww"); // false Number()
         console.log("10"<2); // false 10>2
         console.log("------------------");
-        console.log("10"<"2"); // true "1"<"2"
+        console.log("10"<"2"); // true "1"<"2" string -> char -> ascii
         console.log("aee">"b"); // false "a"<"b"
         console.log("aee">"1"); // true "a">"1"
+        console.log("1".charCodeAt() + "--" + "a".charCodeAt()); // 49--97
         console.log("------------------");
         console.log("aee">1); // false NaN无论怎么比较都是false
         console.log("aee"<1); // false
+        console.log("------------------");
+        console.log(false < 3); // true
+        console.log(false > -1); // true
         console.log("------------------");
         console.log(5 == "5"); // true
         console.log(5 === "5"); // false

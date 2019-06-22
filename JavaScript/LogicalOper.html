@@ -28,8 +28,10 @@
         console.log("-------------------");
         console.log(0 || ++i); // 8
         console.log(i); // 8
-        console.log(1 || i++); // 1
+        console.log(1 || i++); // 1 短路
         console.log(i); // 8
+        console.log(!i++ || ++i); // 10
+        console.log(i); // 10
         console.log(1 < 2 || 34); // true
         console.log(1 > 2 || 34); // 34
         console.log(34 || 1 < 2); // 34
@@ -38,9 +40,13 @@
         console.log(!5>6); // false false > 6 => 0 > 6 => false
         console.log(!(5>6)); // true
         console.log("-------------------");
-        console.log(2 < 3 ? 1 : 2); // 1
         var num = 120;
         console.log((num++,++num)); // 122
+        console.log((++num,num++)); // 123
+        console.log(num); // 124
+        console.log(2 < 3 ? ++num : 2); // 125
+        console.log(2 > 3 ? 2 : num++); // 125
+        console.log(num); // 126
     </script>
 </body>
 </html>
