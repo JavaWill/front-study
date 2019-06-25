@@ -40,11 +40,7 @@
         0<input type="range" id="a" value="50">100+<input type="number" id="b" value="50">
         =<output name="x" for="a b"></output>
     </form>
-    email:<input type="email">
-    tel:<input type="tel">
     number:<input type="number">
-    <br>
-    url:<input type="url">
     search:<input type="search">
     time:<input type="time">
     <br>
@@ -57,13 +53,25 @@
     multiFile:<input type="file" multiple>
     <br>
     <form action="" method="GET">
+        email:<input type="email">
+        tel:<input type="tel">
+        url:<input type="url">
         <!-- 必须设置name，autocomplete才能生效 -->
         name:<input name="name" type="text" placeholder="please input" autofocus="autofocus" 
             autocomplete="on" required="required" accesskey="s"> <!-- alt+s 获焦 -->
         <input type="submit" value="submit">
     </form>
     <!-- 新多媒体元素 -->
-
-
+    <embed src="http://www.w3school.com.cn/i/movie.ogg">
+    <video width="320" height="240" controls="controls" autoplay loop="loop">
+        <source src="http://www.w3school.com.cn/i/movie.ogg" type="video/ogg">
+        <source src="http://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <!-- audio的autoplay失效，有时会成功，但无法重现 -->
+    <audio controls="controls" autoplay>
+        <source src="http://www.w3school.com.cn/i/song.ogg" type="audio/ogg" />
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>
