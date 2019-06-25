@@ -1,10 +1,10 @@
 # wmj-front-study
 ## CSS
 ## HTML
-- CommonTag.html 常用标签
+- CommonTag 常用标签
 ## JavaScript
-- Comparator.html 比较运算符
-- Event.html 事件
-- LogicOper.html 逻辑运算符
-- Operator.html 运算符
-- Type.html 分类
+- Comparator 比较运算符
+- Event 事件
+- LogicOper 逻辑运算符
+- Operator 运算符
+- Type 数据类型
