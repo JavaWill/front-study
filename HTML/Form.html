@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <!-- label包裹一个input，点击label，input获焦 -->
+        <label>name:<input type="text" name="name"></label><br>
+        <!-- label的for属性绑定一个input的id，点击label，input获焦 -->
+        <label for="psw">password:</label><input type="password" id="psw"><br>
+        gender:<input type="radio">man<input type="radio">women<br>
+        hobby:<input type="checkbox">man<input type="checkbox">women<br>
+        appearance:<input type="file"><br>
+        introduce:<textarea cols="4" rows="4"></textarea><br>
+        city:<select>
+            <option>Shanghai</option>
+            <option>Nanjing</option>
+            <option selected="selected">Wuhan</option>
+        </select><br>
+        imgBtn:<input type="image" src="../img/search.png"><br>
+        <fieldset>
+            <legend>legend</legend>
+            <input type="button" value="button">
+            <input type="submit" value="submit">
+            <input type="reset" value="reset">
+        </fieldset>
+    </form>
+</body>
+</html>

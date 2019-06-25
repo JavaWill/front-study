@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="5" align="left" cellspacing="10" width="50%">
+        <caption>表格标题</caption>
+        <!-- thead和tfoot里的th默认居中 -->
+        <thead>
+            <tr>
+                <th colspan="4">
+                    单核还是抱团？
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>    
+                <th colspan="2">夺冠就夸</th>
+                <th colspan="2">回家就喷</th>
+            </tr>
+        </tfoot>
+        <tbody align="center">
+            <tr>
+                <td>皮尔斯</td>
+                <td>加内特</td>
+                <td>雷阿伦</td>
+            </tr>
+            <tr>
+                <td>韦德</td>
+                <td rowspan="2">詹姆斯</td>
+                <td>波什</td>
+            </tr>
+            <tr>
+                <td>欧文</td>
+                <td>乐福</td>
+            </tr>
+            <tr>
+                <td colspan="2">保罗</td>
+                <td colspan="2">哈登</td>
+            </tr>
+            <tr>
+                <td>库里</td>
+                <td>汤普森</td>
+                <td>杜兰特</td>
+                <!-- 表格根据cell文本内容分配宽度，四列都存在三个字，宽度才等分 -->
+                <td>这格林</td>
+            </tr>
+            <tr>
+                <td colspan="4">诺维斯基</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
