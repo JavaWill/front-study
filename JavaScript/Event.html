@@ -129,6 +129,78 @@
             }
         }
     </script>
+    <br>
+    全选<input type="checkbox" name="all">
+    反选<input type="checkbox" name="reverse">
+    詹姆斯<input type="checkbox">
+    科比<input type="checkbox">
+    杜兰特<input type="checkbox">
+    <script>
+        var inputs = document.getElementsByTagName("input");
+        inputs = Array.from(inputs);
+        inputs.shift(); // 去掉第一个input
+        var allInput = inputs[0];
+        allInput.onclick = function(){
+            if(this.checked){
+                for(var i in inputs){
+                    var input = inputs[i];
+                    if(input.name != "reverse"){
+                        input.checked = "checked";
+                    }
+                }
+            }
+        }
+        var reverseInput = inputs[1];
+        reverseInput.onclick = function(){
+            if(this.checked){
+                for(var i in inputs){
+                    var input = inputs[i];
+                    if(input.name != "all" && input.name != "reverse"){
+                        if(input.checked){
+                            input.checked = "";
+                        } else {
+                            input.checked = "checked";
+                        }
+                    }
+                }
+            }
+        }
+        for(var i = 2; i < inputs.length; i++){
+            var input = inputs[i];
+            input.onclick = function(){
+                var allChecked = true;
+                for(var j = 2; j < inputs.length; j++){
+                    if(!inputs[j].checked){
+                        allChecked = false;
+                        break;
+                    }
+                }
+                if(allChecked){
+                    allInput.checked = "checked";
+                }
+            }
+        }
+    </script>
+    <br>
+    <input type="text" id="ide"><input type="button" value="验证码" onclick="genIdentity()">
+    <script>
+        // 数字48-57 字母65-90 97-122
+        function genIdentity(){
+            var c = "";
+            for(var i = 0; i < 6; i++){
+                var p = randomCode(48, 122);
+                if((p>57&&p<65) || (p>90&&p<97)){
+                    i--;
+                } else {
+                    c += String.fromCharCode(p);
+                }
+            }
+            document.getElementById("ide").value = c;
+        }
+        function randomCode(min, max){
+            return parseInt(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
     <hr>
     <a class="on">Tab1</a><a>Tab2</a>
     <div class="tab_content">
