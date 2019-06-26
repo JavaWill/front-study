@@ -68,10 +68,57 @@
         <source src="http://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <!-- audio的autoplay失效，有时会成功，但无法重现 -->
+    <!-- audio的autoplay失效问题，参考https://www.jianshu.com/p/57da5fe6494c -->
     <audio controls="controls" autoplay>
         <source src="http://www.w3school.com.cn/i/song.ogg" type="audio/ogg" />
         Your browser does not support the audio element.
     </audio>
+    <!-- 拖放 -->
+    <script>
+        function allowDrop(ev){
+            // 默认无法将数据/元素放置到其他元素中。如果需要设置允许放置，必须阻止对元素的默认处理方式。
+            ev.preventDefault();
+        }
+        function drag(ev){
+            if(ev == window.event){ // 只有当发生事件时，event才能获取到
+                // console.log(ev.target);
+            }
+            ev.dataTransfer.setData("dragElementId", ev.target.id);
+        }
+        function drop(ev){
+            // ev.preventDefault();
+            var data = ev.dataTransfer.getData("dragElementId");
+            // span img 拖拽到div里面后，也拥有了可放置子元素的能力，会发生img放入span中，span放入img中的情况
+            if(ev.target.tagName == "DIV"){
+                ev.target.appendChild(document.getElementById(data));
+            }
+        }
+    </script>
+    <br>
+    <div id="drop1" style="width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;float: left;" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    <div id="drop2" style="width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;float: left;" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    <!-- img和带有链接的a自带拖拽属性 -->
+    <img id="drag1" src="http://www.w3school.com.cn/i/eg_dragdrop_w3school.gif" ondragstart="drag(event)">
+    <a id="drag2" href="http://www.w3school.com.cn/" ondragstart="drag(event)">可拖拽的超链接</a>
+    <!-- span需要设置允许拖拽 -->
+    <span id="drag3" draggable="true" ondragstart="drag(event)">可拖拽文字</span>
+    <strong id="noDrag1">不可拖拽文字&nbsp;</strong>
+    <em>复制节点&nbsp;</em>
+    <script>
+        document.getElementById("drop1").appendChild(document.getElementById("noDrag1"));
+        document.getElementById("drop2").appendChild(document.getElementsByTagName("em")[0].cloneNode(true));
+    </script>
+    <!-- canvas和svg -->
+    <canvas id="canvas1" width="200" height="100" style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+    </canvas>
+    <script type="text/javascript">
+        var c=document.getElementById("canvas1");
+        var cxt=c.getContext("2d");
+        cxt.moveTo(10,10);
+        cxt.lineTo(150,50);
+        cxt.lineTo(10,50);
+        cxt.stroke();
+    </script>
 </body>
 </html>
