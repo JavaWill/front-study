@@ -77,7 +77,8 @@
             // console.log("onmouse==leave");
         }
         function switchImg(el){
-            var num = el.getAttribute("num"); // num不是自带属性，不能点获取和点设置
+            // num不是元素固有属性，不能用点获取和点设置，getAttribute都可获取
+            var num = el.getAttribute("num"); 
             switch(num){
                 case "1": el.src = "../img/2.jpg";el.setAttribute("num","2");break;
                 case "2": el.src = "../img/1.jpg";el.setAttribute("num","1");break;

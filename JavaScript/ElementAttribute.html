@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img id="img" src="../img/1.jpg" a="wmj">
+    <script>
+        var img = document.getElementById("img");
+        console.dir(img);
+        console.log(img.src); // file:///Users/xxx/Desktop/github/front-study/img/1.jpg
+        console.log(img.getAttribute("src")); // ../img/1.jpg
+        console.log(img.a); // undefined customized attribute is undefined
+        console.log(img.width); // 0
+        console.log(img.getAttribute("a")); // wmj
+        img.c = "wmc";
+        console.log(img.c); // wmc
+        console.log(img.getAttribute("c")); // null getAttribute default null
+        img.removeAttribute("src");
+        console.log(img.src); // "" inherent attribute default string="" number=0 
+        img.removeAttribute("a");
+        console.log(img.getAttribute("a")); // null
+        img.removeAttribute("c");
+        console.log(img.c); // wmc
+    </script>
+</body>
+</html>
