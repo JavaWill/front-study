@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        a.on{
+            border: 2px red solid;
+            border-bottom-color: white;
+            position: relative;
+        }
+        .tab_content{
+            border: 2px red solid;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
     选择字号：
@@ -114,6 +126,27 @@
                 span.innerText = "";
             } else {
                 input.value = "请输入";
+            }
+        }
+    </script>
+    <hr>
+    <a class="on">Tab1</a><a>Tab2</a>
+    <div class="tab_content">
+        <p>tab1 content</p>
+        <p style="display: none">tab2 content</p>
+    </div>
+    <script>
+        var as = document.getElementsByTagName("a");
+        var ps = document.querySelectorAll(".tab_content p");
+        for(var i = 0; i < as.length; i++){
+            as[i].index = i; // index自定义属性会存入dom对象中
+            as[i].onclick = function(){
+                for(var j = 0; j < as.length; j++){
+                    as[j].className = "";
+                    ps[j].style.display = "none";
+                }
+                this.className = "on";
+                ps[this.index].style.display = "block";
             }
         }
     </script>
