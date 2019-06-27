@@ -14,6 +14,7 @@
 |xxx.html|内容
 |:-|:-:|
 |Comparator|比较运算符
+|DomStruct|DOM结构
 |ElementAttribute|节点属性操作
 |Event|事件
 |LogicOper|逻辑运算符

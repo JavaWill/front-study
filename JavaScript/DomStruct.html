@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>列表1<div style="display:none"><span>none_display</span></div><a href="#">xxx</a></li>
+        <li>列表2</li>
+        <li>列表3</li>
+    </ul>
+    <script>
+        var a = document.getElementsByTagName("a")[0];
+        var fLi = a.parentElement;
+        var ul = fLi.parentNode;
+        console.dir(fLi);
+        console.dir(fLi.textContent); // 列表1none_displayxxx
+        console.dir(fLi.innerText); // 列表1xxx
+        console.dir(fLi.innerHTML); // 列表1<div style="display:none"><span>none_display</span></div><a href="#">xxx</a>
+        console.dir(fLi.nextSibling); // 第一个li和第二个li中间的会车文本节点 nodeType=3
+        console.dir(fLi.previousElementSibling); // null
+        console.dir(fLi.previousSibling.previousSibling); // null
+        console.dir(fLi.nextElementSibling); // 第二个li元素节点 nodeType=1
+        console.dir(a.getAttributeNode("href")); // 属性节点 nodeType=2
+        console.dir(ul.childNodes.length); // 7 包含四个回车文本节点
+        console.dir(ul.children.length); // 3 三个li
+        console.dir(ul.lastChild); // #text
+        console.dir(ul.lastElementChild); // 第三个li
+    </script>
+</body>
+</html>
