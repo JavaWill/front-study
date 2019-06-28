@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div contenteditable="true">div</div>
+    <input>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div style="width:100px;height:100px;border:5px black solid;"></div>
+    <script>
+        document.onkeydown = function(e){
+            var e = e || window.event; // 主流浏览器 或 IE
+            console.dir(e.target.nodeName); // "BODY"
+        }
+        document.getElementsByTagName("input").onkeydown = function(e){
+            var e = e || window.event;
+            console.dir(e.target.nodeName); // "INPUT"
+        }
+        document.getElementsByTagName("div").onkeydown = function(e){
+            var e = e || window.event;
+            console.dir(e.target.nodeName); // "DIV"
+        }
+        document.onmousedown = function(e){
+            var e = e || window.event;
+            console.log(e);
+            var scrollTop = document.documentElement.scrollTop;
+            console.log("pageXY  " + e.pageX + " : " + e.pageY); // 以真正HTML页面左上角为原点
+            console.log("clientXY  " + e.clientX + " : " + e.clientY + " : " + scrollTop); // 以浏览器可见的HTML页面左上角为原点
+            console.log("xy  " + e.x + " : " + e.y); // 同clientXY
+            console.log("screenXY  " + e.screenX + " : " + e.screenY); // 以屏幕左上角为原点
+            console.log("offsetXY  " + e.offsetX + " : " +  e.offsetY); // 以目标节点的内填充左上角为原点
+        }
+    </script>
+</body>
+</html>
