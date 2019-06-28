@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var t1 = new Date().getTime();
+        var time = 99999;
+        
+        // for(var i = 0; i < time; i++){ // 崩了
+        //     document.body.innerHTML += "<div>div</div>";
+        // }
+
+        // for(var i = 0; i < time; i++){ // 188-497
+        //     var div = document.createElement("div");
+        //     div.innerText = "div";
+        //     document.body.appendChild(div);
+        // }
+
+        // var str = "";
+        // for(var i = 0; i < time; i++){ // 177-450
+        //     str += "<div>div</div>";
+        // }
+        // document.body.innerHTML += str;
+
+        
+        // var cache = document.createDocumentFragment(); // 216-536
+        // for(var i = 0; i < time; i++){
+        //     var div = document.createElement("div");
+        //     div.innerText = "div";
+        //     cache.appendChild(div);
+        // }
+        // document.body.appendChild(cache);
+
+        var t2 = new Date().getTime();
+        console.log(t2 - t1);
+
+    </script>
+</body>
+</html>
