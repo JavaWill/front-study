@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+    </ul>
+    <script>
+        var li = document.createElement("li"); // 创建元素
+        li.innerHTML = "列表一";
+        var ul = document.getElementsByTagName("ul")[0];
+        ul.appendChild(li); // 添加子元素
+        var li_2 = li.cloneNode(); // 只复制元素结构 浅拷贝
+        ul.appendChild(li_2);
+        var li_3 = li.cloneNode(true); // 复制元素及其所有子元素 深拷贝
+        ul.appendChild(li_3);
+        var li_4 = li.cloneNode();
+        li_4.innerHTML = "列表四";
+        ul.insertBefore(li_4, li); // 添加到指定元素之前
+    </script>
+    <table border="1">
+        <tr>
+            <td>詹姆斯</td>
+            <td>科比</td>
+            <td align="center" width="100px">杜兰特</td>
+            <td>波什</td>
+        </tr>
+    </table>
+    <script>
+        var table = document.getElementsByTagName("table")[0];
+        var tbody = table.children[0];
+        var tr = tbody.children[0];
+        var james = tr.children[0];
+        var kobe = tr.children[1];
+        var durant = tr.children[2];
+        var bosh = tr.children[3];
+        james.remove();
+        tr.removeChild(kobe);
+        durant.removeAttribute("align");
+        durant.removeAttributeNode(durant.getAttributeNode("width"));
+        var wade = document.createElement("td");
+        wade.innerHTML = "韦德";
+        tr.replaceChild(wade, bosh);
+        console.dir(tr);
+    </script>
+</body>
+</html>
