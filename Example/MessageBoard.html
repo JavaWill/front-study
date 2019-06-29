@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul></ul>
+    留言：<input type="text"/><br>
+    <input type="button" value="发布">
+    <script>
+        var ul = document.getElementsByTagName("ul")[0];
+        var message = document.getElementsByTagName("input")[0];
+        var button = document.getElementsByTagName("input")[1];
+        button.onclick = function(){
+            var li = document.createElement("li");
+            li.innerText = message.value;
+
+            if(ul.children.length > 5){
+                ul.children[5].remove();
+                ul.insertBefore(li, ul.children[0]);
+            } else if(ul.children.length > 0){
+                ul.insertBefore(li, ul.children[0]);
+            } else {
+                ul.appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>

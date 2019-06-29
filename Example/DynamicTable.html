@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    输入行：<input type="number"><br>
+    输入列：<input type="number"><br>
+    <input type="button" value="创建表格" onclick="genTable()">
+    <input type="button" value="删除表格" onclick="delTable()"><br>
+    <script>
+        function delTable(){
+            var table = document.getElementsByTagName("table")[0];
+            table.remove();
+        }
+        function genTable(){
+            var row = document.getElementsByTagName("input")[0].value;
+            var column = document.getElementsByTagName("input")[1].value;
+            var table = document.createElement("table");
+            table.border = 1;
+            var tbody = document.createElement("tbody");
+            var fragR = document.createDocumentFragment();
+            for(var i = 0; i < row; i++){
+                var tr = document.createElement("tr");
+                var fragC = document.createDocumentFragment();
+                for(var j = 0; j < column; j++){
+                    var td = document.createElement("td");
+                    td.width = "50px";
+                    td.height = 50;
+                    if(j == column - 1){
+                        var button = document.createElement("button");
+                        button.innerText = "删除";
+                        button.onclick = function(){
+                            this.parentNode.parentNode.remove();
+                        }
+                        td.appendChild(button);
+                    } else {
+                        td.setAttribute("bgcolor", genColor());
+                    }
+                    fragC.appendChild(td);
+                }
+                tr.appendChild(fragC);
+                fragR.appendChild(tr);
+            }
+            tbody.appendChild(fragR);
+            table.appendChild(tbody);
+            document.body.appendChild(table);
+        }
+        // 0-9=48-57 A-F=65-70
+        function genColor(){
+            var c = "#";
+            for(var i = 0; i < 6; i++){
+                var p = randomCode(48, 70);
+                if(p>57&&p<65){
+                    i--;
+                } else {
+                    c += String.fromCharCode(p);
+                }
+            }
+            return c;
+        }
+        function randomCode(min, max){
+            return parseInt(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</body>
+</html>
