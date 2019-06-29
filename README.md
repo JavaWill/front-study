@@ -2,6 +2,7 @@
 ## CSS
 ## Example
 |xxx.html|内容
+|:-|:-:|
 |DynamicTable|动态创建表格
 |MessageBoard|模拟发帖
 ## HTML
