@@ -42,6 +42,7 @@
         <p>第四行</p>
         <p>第五行</p>
         <h4></h4>
+        <img id="moveImg" src="../img/1.jpg" width="100px" height="100px" style="position:absolute">
     </div>
     <script>
         var pList = document.getElementById("pList").getElementsByTagName("p");
@@ -55,13 +56,17 @@
                 this.style.color = "black";
             }
         }
-        document.getElementById("pList").onmousemove = function(){
+        document.getElementById("pList").onmousemove = function(e){
             var h4 = document.getElementsByTagName("h4")[0];
             if(h4.innerText.length > 60){
                 h4.innerText = "+";
             } else {
                 h4.innerText += "+";
             }
+            var e = e || window.event;
+            var moveImg = document.getElementById("moveImg");
+            moveImg.style.left = e.pageX + "px"; // style属性不能识别数字 dom固有属性可以识别
+            moveImg.style.top = e.pageY + "px";
         }
     </script>
     <hr>
