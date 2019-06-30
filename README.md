@@ -4,7 +4,8 @@
 |xxx.html|内容
 |:-|:-:|
 |DynamicTable|动态创建表格
-|MessageBoard|留言置顶
+|MessageBoard|留言板
+|SwitchPic|图片切换
 ## HTML
 |xxx.html|内容
 |:-|:-:|
