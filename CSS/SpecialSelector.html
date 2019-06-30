@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 通配符选择器 */
+        *{
+            color: red;
+        }
+        /* 属性选择器 */
+        a[href]{
+            color: blue; /* 包括了a:link和a:visited的color */
+        }
+        /* 伪类选择器 link未访问 visited已访问 hover鼠标悬浮 active鼠标按住不松 */
+        a:hover{
+            color: aqua;
+        }
+        /* 所有li中的第一个li */
+        li:first-child{
+            font-size: 150%;
+        }
+        li:last-child{
+            font-size: 50%;
+        }
+        li:nth-child(2){
+            color:gold;
+        }
+        /* n 0 1 2 odd=2n-1 even=2n */
+        p:nth-child(2n){
+            color: firebrick;
+        }
+        /* 倒数偶数 */
+        header span:nth-last-child(even){
+            color: darkslategrey;
+        }
+    </style>
+</head>
+<body>
+    <h4>一个h4</h4>
+    <!-- 上面有个h4，导致p的顺序从2开始 -->
+    <p>一个p</p>
+    <p>两个p</p>
+    <p>三个p</p>
+    <p>四个p</p>
+    <header>
+        <span>詹姆斯</span>
+        <span>科比</span>
+        <span>杜兰特</span>
+        <span>欧文</span>
+    </header>
+    <a href="#">一个a</a>
+    <ul>
+        <li>第一个li</li>
+        <li>第二个li</li>
+        <li>第三个li</li>
+    </ul>
+</body>
+</html>
