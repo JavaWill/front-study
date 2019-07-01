@@ -2,7 +2,7 @@
 ## CSS
 |xxx.html|内容
 |:-|:-:|
-|BasicSelector|基本选择器
+|Selector|选择器
 ## Example
 |xxx.html|内容
 |:-|:-:|
