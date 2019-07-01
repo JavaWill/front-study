@@ -14,15 +14,24 @@
             border-spacing: 0; /* 相邻单元格的边框距离 */
             border-collapse: collapse; /* 合并边框 */
         }
+        /* none 无装饰，underline 下划线，line-through 删除线，overline 上划线 */
+        a{
+            text-decoration: none; 
+        }
+        /* 后代选择器 */
         table th{
             background-color: #f8f8f8;
+        }
+        /* 选择器分组，子元素选择器 */
+        table th, table > tbody > tr > td{
             border: 1px #e6e6e6 solid;
         }
-        table td{
-            border: 1px #e6e6e6 solid;
+        /* 相邻兄弟选择器，选择的是，紧跟在th元素后面，并且拥有共同父元素的th元素 */
+        th + th{
+            color: brown;
         }
-        /* 类选择器 */
-        .c_tec{
+        /* 通配符选择器，类选择器 */
+        *.c_tec{
             font-style: oblique; /* 字体样式 */
             font-family: fantasy; /* 字体系列 */
         }
@@ -31,10 +40,41 @@
             font-weight: bold; /* 字体粗细 */
             font-size: 150%; /* 字体大小 */
         }
+        /* 属性选择器 */
+        [href]{
+            font-size: xx-small;
+        }
+        /* 伪类选择器 link未访问 visited已访问 hover鼠标悬浮 active鼠标按住不松 */
+        a:hover{
+            color: chocolate;
+        }
+        /* n 0 1 2 odd=2n-1 even=2n */
+        tr:nth-child(even){
+            background-color: #cdf5e9;
+        }
+        /* 从后往前数 */
+        tr:nth-last-child(even){
+            font-family: cursive;
+        }
+        /* 伪元素 */
+        p::first-letter{
+            font-size: larger;
+            font-weight: bolder;
+        }
+        /* 猜测：由于第一个p的前面有header和h4，所以它的顺序变成了3，导致first-child失效；同时，first-letter效果失效*/
+        p:nth-child(3)::before{
+            content: url(../img/4.gif);
+        }
+        a::before{
+            content: ' ('
+        }
+        a::after{
+            content: ')'
+        }
     </style>
 </head>
 <body>
-    <header>勒布朗·詹姆斯</header>
+    <header>勒布朗·詹姆斯<a href="https://baike.baidu.com/item/%E5%8B%92%E5%B8%83%E6%9C%97%C2%B7%E8%A9%B9%E5%A7%86%E6%96%AF/1989503?fromtitle=%E8%A9%B9%E5%A7%86%E6%96%AF&fromid=14189565&fr=aladdin#4" target="_blank">详情</a></header>
     <h4>简介</h4>
     <p>詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中，在2009年与2010年蝉联NBA常规赛最有价值球员（MVP）。2010年，詹姆斯转会至迈阿密热火队。2012年，詹姆斯得到NBA个人生涯的第3座常规赛MVP，第1个总冠军和总决赛MVP，并代表美国男篮获得了伦敦奥运会金牌，追平了迈克尔·乔丹在1992年所创的纪录。2013年，詹姆斯获得第4个常规赛MVP、第2个NBA总冠军和第2个总决赛MVP，实现两连冠。2014年，詹姆斯回归骑士。2016年，詹姆斯带领骑士逆转战胜卫冕冠军勇士获得队史首个总冠军和个人第3个总决赛MVP。2018年7月10日，詹姆斯正式与湖人签下4年1.53亿美元的合同。</p>
     <h4>荣誉</h4>
@@ -53,6 +93,18 @@
             <tr>
                 <td>NBA得分王</td>
                 <td>1次（2007-2008赛季，30.0分）</td>
+            </tr>
+            <tr>
+                <td>NBA东部联盟冠军</td>
+                <td>9次（2007年、2011年~2018年）</td>
+            </tr>
+            <tr>
+                <td>NBA常规赛MVP</td>
+                <td>4次（2009年、2010年、2012年、2013年）</td>
+            </tr>
+            <tr>
+                <td>NBA总决赛MVP</td>
+                <td>3次（2012年、2013年、2016年）</td>
             </tr>
         </tbody>
     </table>
