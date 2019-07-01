@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://www.baidu.com/" id="pre">百度</a>
+    <script>
+        document.getElementById("pre").onclick = function pre(e){
+            alert("prevent");
+            var e = e || window.event;
+            // e.preventDefault(); // 阻止默认行为
+            // e.returnValue = false; // IE低版本
+            return false; // 效果同上
+        }
+    </script>
+    <ul>
+        <li>詹姆斯</li>
+    </ul>
+    <script>
+        document.getElementsByTagName("ul")[0].addEventListener("click", function(){
+            console.log("bubble ul");
+        });
+        // onxxx事件只有冒泡冒泡
+        document.getElementsByTagName("li")[0].onclick = function(e){
+            var e = e || window.event;
+            e.stopPropagation(); // 阻止冒泡
+            // e.cancelBubble = true; // IE低版本
+            console.log("bubble li");
+        }
+    </script>
+</body>
+</html>

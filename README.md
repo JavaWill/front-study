@@ -28,7 +28,9 @@
 |DomStruct|DOM结构
 |ElementAttribute|节点属性操作
 |Event|事件
+|EventFlow.html|事件流
 |EventObj|事件对象
+|EventPrevent|阻止事件
 |LogicOper|逻辑运算符
 |Operator|运算符
 |Type|数据类型

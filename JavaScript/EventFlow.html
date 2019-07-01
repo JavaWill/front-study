@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>北京</li>
+        <li>上海</li>
+        <li>广州</li>
+        <li>深圳</li>
+    </ul>
+    <script>
+        /*
+        事件三个阶段：
+            1，捕获阶段
+            2，执行当前节点（先冒泡再捕获）
+            3，冒泡阶段
+        */
+        document.addEventListener("click", function(){
+            console.log("bubbling domcument");
+        }, false); // 默认冒泡false
+        document.getElementsByTagName("ul")[0].addEventListener("click", function(){
+            console.log("bubbling ul");
+        }, false);
+        document.querySelector("ul>li:first-child").addEventListener("click", function(){
+            console.log("bubbling first li");
+        }, false);
+        document.addEventListener("click", function(){
+            console.log("capture domcument");
+        }, true);
+        document.getElementsByTagName("ul")[0].addEventListener("click", function(){
+            console.log("capture ul");
+        }, true);
+        document.querySelector("ul>li:first-child").addEventListener("click", function(){
+            console.log("capture first li");
+        }, true);
+        // 事件委托，父节点监听事件，触发子节点效果
+        document.getElementsByTagName("ul")[0].addEventListener("click", function(e){
+            var e = e || window.event;
+            e.target.style.color = "brown";
+        });
+    </script>
+</body>
+</html>
