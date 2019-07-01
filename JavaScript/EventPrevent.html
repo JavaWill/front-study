@@ -24,7 +24,7 @@
         document.getElementsByTagName("ul")[0].addEventListener("click", function(){
             console.log("bubble ul");
         });
-        // onxxx事件只有冒泡冒泡
+        // onxxx创建事件只能冒泡
         document.getElementsByTagName("li")[0].onclick = function(e){
             var e = e || window.event;
             e.stopPropagation(); // 阻止冒泡
