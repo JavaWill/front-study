@@ -22,7 +22,7 @@
         table th{
             background-color: #f8f8f8;
         }
-        /* 选择器分组，子元素选择器 */
+        /* 并集选择器，子元素选择器 */
         table th, table > tbody > tr > td{
             border: 1px #e6e6e6 solid;
         }
@@ -33,8 +33,8 @@
         th + th{
             color: brown;
         }
-        /* 通配符选择器，类选择器 */
-        *.c_tec{
+        /* 通配符选择器，交集选择器 */
+        *.c_tec, p.c_tec{
             font-style: oblique; /* 字体样式 */
             font-family: fantasy; /* 字体系列 */
         }
