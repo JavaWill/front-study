@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            height: 500px;
+        }
+        /* 块元素独占一行，且拥有宽高，默认是父元素的100% */
+        header{
+            border: 1px brown solid;
+            width: 10%;
+            height: 5%; /* 如果父元素body没有显式声明高度，则百分比设置失效，高度由内容决定，宽度没这个问题 */
+        }
+        /* 内联/行内元素无换行，不能设置宽高，其由内容决定 */
+        span{
+            border: 2px salmon solid;
+            width: 100px;
+            height: 300px;
+        }
+        /* 行内元素可设置四边padding并生效，margin只有左右能生效 */
+        strong{
+            border: 2px rgb(156, 11, 132) solid;
+            margin: 10px;
+            padding: 10px;
+        }
+        /* 块元素四边padding和margin都生效，且内容可以自动换行，行内元素没有宽度，内容无换行 */
+        p{
+            width: 100px;
+            border: 2px rgb(73, 86, 202) solid;
+            margin: 5px;
+            padding: 5px;
+        }
+        /* 行内块元素，无换行，可设置宽高，四边padding和margin都生效， */
+        input{
+            width: 50px;
+            height: 30px;
+            margin: 5px;
+            padding: 3px;
+        }
+        /* 1，块元素转行内元素 */
+        p[inline]{
+            display: inline;
+        }
+        /* 2，块元素转行内块元素，内容自动换行 */
+        div[inlineBlock]{
+            display: inline-block;
+            width: 300px;
+        }
+        /* 3，行内块元素转行内元素，上下margin仍然存在，宽高仍然有效，有点奇怪 */
+        input[inline]{
+            display: inline;
+        }
+        /* 4，行内块元素转块元素 */
+        input[block]{
+            display: block;
+        }
+        a{
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            padding: 5px;
+        }
+        /* 5，行内元素转行内块元素 */
+        a[inlineBlock]{
+            display: inline-block;
+        }
+        /* 6，行内元素转块元素 */
+        a[block]{
+            display: block;
+        }
+        /* 
+        行内元素设置line-height，会用自己撑开父元素（元素高度+上间距+下间距=行高），本身元素的高度没变，不建议使用 
+        行高最小值是0
+        */
+        em{
+            border: 1px red solid;
+            line-height: 50px;
+        }
+        /* 
+        块元素设置line-height，会用内容撑开自己（文本高度+上间距+下间距=行高），高度随之改变，若子元素也设置了行高，以较高值为准
+        如果设置了高度，则过多的文本会溢出 
+        */
+        p{
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>静夜思</header>
+    <h4><span>[唐]</span> <strong>李白</strong></h4>
+    <p>床前明月光，<em>疑是地上霜</em>。</p>
+    <p inline>举头望明月，低头思故乡。</p>
+    <input readonly value="inline-block"><input inline readonly value="inline"><input block readonly value="block">
+    <a inlineBlock>诗</a><a block>仙</a>
+    <br>
+    <div inlineBlock>
+        太白诸绝句，信口而成，所谓无意于工而无不工者。
+    </div>
+</body>
+</html>
