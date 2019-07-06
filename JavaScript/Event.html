@@ -128,6 +128,23 @@
                 input.value = "请输入";
             }
         }
+        // 监听所有按键，包括组合键，一直按住会不断触发(除了shift、ctrl、alt键)
+        document.getElementById("input").onkeydown = function(e){
+            var e = e || window.event;
+            console.log("onkeydown " + e.keyCode);
+        }
+        // 松开按键触发
+        document.getElementById("input").onkeyup = function(e){
+            var e = e || window.event;
+            console.log("onkeyup " + e.keyCode);
+        }
+        // shift、ctrl、alt键无法监听，可监听包含他们的组合键，中文输入法无法监听
+        // 单个按键只能触发一次，但部分组合键会不断触发，应该是带有特殊含义
+        document.getElementById("input").onkeypress = function(e){
+            var e = e || window.event;
+            console.log("onkeypress " + e.keyCode + " ctrl: " + e.ctrlKey 
+                + " shift: " + e.shiftKey + " alt: " + e.altKey);
+        }
     </script>
     <br>
     全选<input type="checkbox" name="all">
@@ -182,7 +199,7 @@
         }
     </script>
     <br>
-    <input type="text" id="ide"><input type="button" value="验证码" onclick="genIdentity()">
+    <input readonly type="text" id="ide"><input type="button" value="验证码" onclick="genIdentity()">
     <script>
         // 数字48-57 字母65-90 97-122
         function genIdentity(){
