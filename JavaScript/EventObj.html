@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        #drag{
+            position: relative;
+            border: 1px darkcyan solid;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
     <div contenteditable="true">div</div>
     <input>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div style="width:100px;height:100px;border:5px black solid;"></div>
     <script>
         document.onkeydown = function(e){
             var e = e || window.event; // 主流浏览器 或 IE
@@ -22,17 +29,42 @@
         }
         document.getElementsByTagName("div").onkeydown = function(e){
             var e = e || window.event;
-            console.dir(e.target.nodeName); // "DIV"
+            console.dir(e.target.nodeName); // contenteditable "DIV"
         }
         document.onmousedown = function(e){
             var e = e || window.event;
-            console.log(e);
             var scrollTop = document.documentElement.scrollTop;
             console.log("pageXY  " + e.pageX + " : " + e.pageY); // 以真正HTML页面左上角为原点
             console.log("clientXY  " + e.clientX + " : " + e.clientY + " : " + scrollTop); // 以浏览器可见的HTML页面左上角为原点
             console.log("xy  " + e.x + " : " + e.y); // 同clientXY
             console.log("screenXY  " + e.screenX + " : " + e.screenY); // 以屏幕左上角为原点
             console.log("offsetXY  " + e.offsetX + " : " +  e.offsetY); // 以目标节点的内填充左上角为原点
+        }
+    </script>
+    <div id="drag">
+        模拟拖动
+    </div>
+    <script>
+        var drag = document.getElementById("drag");
+        drag.onmousedown = function(e){
+            var e = e || window.event;
+            var fx = e.pageX || e.layerX;
+            var fy = e.pageY || e.layerY;
+            var leftPx = drag.style.left || "0px";
+            var topPx = drag.style.top || "0px";
+            var left = parseInt(leftPx.substring(0, leftPx.indexOf("px")));
+            var top = parseInt(topPx.substring(0, topPx.indexOf("px")));
+            document.onmousemove = function(e){
+                var e = e || window.event;
+                var sx = e.pageX || e.layerX;
+                var sy = e.pageY || e.layerY;
+                var _el = drag;
+                _el.style.left = (left + sx - fx) + "px";
+                _el.style.top = (top + sy - fy) + "px";
+            }
+            drag.onmouseup = function(e){
+                document.onmousemove = null;
+            }
         }
     </script>
 </body>
