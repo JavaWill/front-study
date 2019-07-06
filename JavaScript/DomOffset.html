@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 5px;
+        }
+        #parent{
+            border: 1px red solid;
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            padding: 3px;
+        }
+        #son{
+            border: 1px green solid;
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            padding: 4px;
+            overflow: auto;
+        }
+        #lebron{
+            display: inline-block;
+            border: 1px brown solid;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+        }
+        #kobe{
+            display: inline-block;
+            border: 1px khaki solid;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="son">
+            测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字
+        </div>
+    </div>
+    <script>
+        var parent = document.getElementById("parent");
+        var son = document.getElementById("son");
+        /*
+        offsetParent 距离当前元素最近的“带有定位”的祖先元素
+        offsetLeft 元素border的左上角到offsetParent整个元素的左上角
+        offsetTop = sMargin + pPadding + pBorder + pMargin
+        offsetWidth = sContentWidth + sPadding + sBorder
+        clientHeight = sContentWidth + sPadding
+        scrollHeight = sRealContentHeight + sPadding
+        */
+        console.log(parent.offsetParent); // body 
+        console.log(parent.offsetLeft); // 25 = 20 + 5
+        console.log(parent.offsetTop); // 20 parent的上下margin覆盖了body的上下margin
+        console.log(parent.offsetWidth); // 208 = 200 + 3 + 3 + 1 + 1
+        console.log(parent.clientHeight); // 206 = 200 + 3 + 3
+        console.log(son.offsetParent); // body
+        console.log(son.offsetLeft); // 49 = 20 + 3 + 1 + 20 + 5
+        console.log(son.offsetTop); // 44 = 20 + 3 + 1 + 20
+        console.log(son.offsetWidth); // 110 = 100 + 4 + 4 + 1 + 1
+        console.log(son.clientHeight); // 108 = 100 + 4 + 4
+        console.log(son.scrollHeight); // 140 = 132 + 4 + 4
+        console.log(son.scrollTop); // 0
+        console.log(son.scrollWidth); // 108
+    </script>
+    <div id="lebron">
+        詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中，在2009年与2010年蝉联NBA常规赛最有价值球员（MVP）。2010年，詹姆斯转会至迈阿密热火队。2012年，詹姆斯得到NBA个人生涯的第3座常规赛MVP，第1个总冠军和总决赛MVP，并代表美国男篮获得了伦敦奥运会金牌，追平了迈克尔·乔丹在1992年所创的纪录。2013年，詹姆斯获得第4个常规赛MVP、第2个NBA总冠军和第2个总决赛MVP，实现两连冠。2014年，詹姆斯回归骑士。2016年，詹姆斯带领骑士逆转战胜卫冕冠军勇士获得队史首个总冠军和个人第3个总决赛MVP。2018年7月10日，詹姆斯正式与湖人签下4年1.53亿美元的合同。
+    </div>
+    <div id="kobe">
+        科比·布莱恩特（Kobe Bryant），1978年8月23日出生于美国宾夕法尼亚州费城，前美国职业篮球运动员，司职得分后卫/小前锋（锋卫摇摆人），绰号“黑曼巴”/“小飞侠”，是前NBA球员乔·布莱恩特的儿子。 [1] 
+        1996年NBA选秀中，科比在第1轮第13位被夏洛特黄蜂队选中，后被交易至洛杉矶湖人队，整个NBA生涯（1996年-2016年）全部效力于NBA洛杉矶湖人队。
+    </div>
+    <script>
+        var lebron = document.getElementById("lebron");
+        var kobe = document.getElementById("kobe");
+        var lebronMore = lebron.scrollHeight - lebron.clientHeight;
+        var kobeMore = kobe.scrollHeight - kobe.clientHeight;
+        var key = "";
+        lebron.onmouseover = function(){
+            key = "lebron";
+        }
+        kobe.onmouseover = function(){
+            key = "kobe";
+        }
+        lebron.onscroll = function(){
+            if(key != "lebron"){
+                return;
+            }
+            console.log("lebron scroll");
+            var _el = this;
+            var scrollTop = _el.scrollTop;
+            kobe.scrollTop = parseInt(scrollTop * (kobeMore / lebronMore));
+        }
+        kobe.onscroll = function(){
+            if(key != "kobe"){
+                return;
+            }
+            console.log("kobe scroll");
+            var _el = this;
+            var scrollTop = _el.scrollTop;
+            lebron.scrollTop = parseInt(scrollTop * (lebronMore / kobeMore));
+        }
+    </script>
+</body>
+</html>

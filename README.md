@@ -25,6 +25,7 @@
 |:-|:-:|
 |Comparator|比较运算符
 |DocFragment|文档碎片
+|DomOffset|DOM偏移量属性
 |DomOper|DOM操作
 |DomStruct|DOM结构
 |ElementAttribute|节点属性操作
