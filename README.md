@@ -8,6 +8,7 @@
 |xxx.html|内容
 |:-|:-:|
 |DynamicTable|动态创建表格
+|Magnifier|图片放大镜
 |MessageBoard|留言板
 |SwitchPic|图片切换
 ## HTML

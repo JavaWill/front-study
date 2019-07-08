@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div.box > div{
+        border-width: 10px;
+        border-style: solid;
+        border-color: gray;
+        display: inline-block;
+    }
+    #small, img{
+        vertical-align: top;
+    }
+    #small{
+        position: relative;
+    }
+    #big{
+        overflow: hidden;
+        display: none;
+    }
+    #big img{
+        position: relative;
+        top: 1px;
+    }
+    #small div.mask{
+        position: absolute;
+        background-color: yellow;
+        width: 30px;
+        height: 30px;
+        top: 0px;
+        opacity: 0.7;
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div id="small">
+            <img src="../img/4.gif">
+            <div class="mask"></div>
+        </div>
+        <div id="big">
+            <img src="../img/3.jpg">
+        </div>
+    </div>
+    <script>
+        var small = document.getElementById("small");
+        var mask = document.getElementsByClassName("mask")[0];
+        small.onmousemove = function(e){
+            var e = e || window.event;
+            var x = e.pageX;
+            var y = e.pageY;
+            var maskWidth = getCssProperty(mask, "width");
+            var maskHeight = getCssProperty(mask, "height");
+            var smallWidth = getCssProperty(small, "width");
+            var smallHeight = getCssProperty(small, "height");
+            var smallLeft = small.offsetLeft;
+            var smallTop = small.offsetTop;
+            var smallBorderWidth = getCssProperty(small, "border-width");
+            var maskMaxLeft = smallWidth - maskWidth;
+            var maskMinLeft = 0;
+            var maskMaxTop = smallHeight - maskHeight;
+            var maskMinTop = 0;
+            var maskLeft = e.pageX - smallLeft - smallBorderWidth - (maskWidth / 2);
+            var maskTop = e.pageY - smallTop - smallBorderWidth - (maskHeight/ 2);
+            maskLeft = maskLeft > maskMaxLeft ?  maskMaxLeft : maskLeft < maskMinLeft ? maskMinLeft : maskLeft;
+            maskTop = maskTop > maskMaxTop ?  maskMaxTop : maskTop < maskMinTop ? maskMinTop : maskTop;
+            // console.log(smallLeft + " : " + smallTop + " : " + smallBorderWidth);
+            // console.log(maskMaxLeft + " : " + maskMaxTop);
+            // console.log(maskMaxLeft + " : " + maskMaxTop);
+            // console.log(e.offsetX + " : " + e.offsetY);
+            // console.log(maskWidth + " : " + maskHeight);
+            // console.log(mask.offsetWidth + " : " + mask.offsetHeight);
+            // console.log(maskLeft + " : " + maskTop);
+            mask.style.display = "block";
+            mask.style.left = maskLeft + "px";
+            mask.style.top = maskTop + "px";
+
+            var big = document.getElementById("big");
+            big.style.display = "inline-block";
+            var bigImg = big.getElementsByTagName("img")[0];
+            var bigImgWidth = getCssProperty(bigImg, "width");
+            var bigImgHeight = getCssProperty(bigImg, "height");
+            var bigWidth = smallWidth * 6;
+            var bigHeight = smallHeight * 6;
+            var leftPercent = (bigImgWidth - bigWidth) / (smallWidth - maskWidth);
+            var topPercent = (bigImgHeight - bigHeight) / (smallHeight - maskHeight);
+            var bigImgLeft = parseInt(maskLeft * leftPercent);
+            var bigImgTop = parseInt(maskTop * topPercent);
+            // console.log(bigImgWidth + " : " + bigImgHeight);
+            // console.log(bigWidth + " : " + bigHeight);
+            // console.log(bigImgLeft + " : " + bigImgTop);
+            big.style.width = bigWidth + "px";
+            big.style.height = bigHeight + "px";
+            bigImg.style.left = -bigImgLeft + "px";
+            bigImg.style.top = -bigImgTop + "px";
+        }
+        small.onmouseout = function(){
+            mask.style.display = "none";
+            big.style.display = "none";
+        }
+        function getCssProperty(el, propertyName){
+            return parseInt(window.getComputedStyle(el).getPropertyValue(propertyName));
+        }
+    </script>
+</body>
+</html>
