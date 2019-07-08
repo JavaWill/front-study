@@ -53,7 +53,7 @@
             var leftPx = drag.style.left || "0px";
             var topPx = drag.style.top || "0px";
             var left = parseInt(leftPx.substring(0, leftPx.indexOf("px")));
-            var top = parseInt(topPx.substring(0, topPx.indexOf("px")));
+            var top = parseInt(topPx);
             document.onmousemove = function(e){
                 var e = e || window.event;
                 var sx = e.pageX || e.layerX;

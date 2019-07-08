@@ -57,6 +57,7 @@
         clientHeight = sContentWidth + sPadding
         scrollHeight = sRealContentHeight + sPadding
         style.width只能获取内嵌式css属性，内联或外联都不行，width只能获取标签自带属性
+        如何获取contentWidth：window.getComputedStyle(document.getElementById("_p")).getPropertyValue("width")
         */
         console.log(parent.offsetParent); // body 
         console.log(parent.offsetLeft); // 25 = 20 + 5
