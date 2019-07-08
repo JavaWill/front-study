@@ -50,6 +50,7 @@
     <script>
         var small = document.getElementById("small");
         var mask = document.getElementsByClassName("mask")[0];
+        var big = document.getElementById("big");
         small.onmousemove = function(e){
             var e = e || window.event;
             var x = e.pageX;
@@ -76,12 +77,9 @@
             // console.log(maskWidth + " : " + maskHeight);
             // console.log(mask.offsetWidth + " : " + mask.offsetHeight);
             // console.log(maskLeft + " : " + maskTop);
-            mask.style.display = "block";
             mask.style.left = maskLeft + "px";
             mask.style.top = maskTop + "px";
-
-            var big = document.getElementById("big");
-            big.style.display = "inline-block";
+            
             var bigImg = big.getElementsByTagName("img")[0];
             var bigImgWidth = getCssProperty(bigImg, "width");
             var bigImgHeight = getCssProperty(bigImg, "height");
@@ -98,6 +96,10 @@
             big.style.height = bigHeight + "px";
             bigImg.style.left = -bigImgLeft + "px";
             bigImg.style.top = -bigImgTop + "px";
+        }
+        small.onmouseover = function(){
+            mask.style.display = "block";
+            big.style.display = "inline-block";
         }
         small.onmouseout = function(){
             mask.style.display = "none";
