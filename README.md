@@ -28,6 +28,7 @@
 |:-|:-:|
 |Bom|浏览器对象模型
 |Comparator|比较运算符
+|ControlOper|控制运算符
 |DocFragment|文档碎片
 |DomOffset|DOM偏移量属性
 |DomOper|DOM操作
