@@ -50,7 +50,7 @@
             display: inline-block;
             width: 300px;
         }
-        /* 3，行内块元素转行内元素，上下margin仍然存在，宽高仍然有效，有点奇怪 */
+        /* 3，行内块元素转行内元素，失败，因为input属于替换元素：img、textarea、input、select、object */
         input[inline]{
             display: inline;
         }

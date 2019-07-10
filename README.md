@@ -7,6 +7,8 @@
 ## Example
 |xxx.html|内容
 |:-|:-:|
+|Clock|模拟时钟
+|Drag|模拟拖动
 |DynamicTable|动态创建表格
 |Magnifier|图片放大镜
 |MessageBoard|留言板
@@ -24,6 +26,7 @@
 ## JavaScript
 |xxx.html|内容
 |:-|:-:|
+|Bom|浏览器对象模型
 |Comparator|比较运算符
 |DocFragment|文档碎片
 |DomOffset|DOM偏移量属性

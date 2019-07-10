@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <strong>当前时间</strong>
+        <span id="hour"></span>&nbsp;:&nbsp;
+        <span id="minute"></span>&nbsp;:&nbsp;
+        <span id="second"></span>
+    </div>
+    <div>
+        <strong>距离双十一还有</strong>
+        <span id="d_day"></span>天
+        <span id="d_hour"></span>时
+        <span id="d_minute"></span>分
+        <span id="d_second"></span>秒
+    </div>
+    <script>
+        setInterval(function(){
+            var now = new Date();
+            var hour = now.getHours();
+            var minute =  now.getMinutes();
+            var second = now.getSeconds();
+            document.getElementById("hour").innerText = toTwo(hour);
+            document.getElementById("minute").innerText = toTwo(minute);
+            document.getElementById("second").innerText = toTwo(second);
+        }, 1000);
+        function toTwo(a){
+            return a < 10 ? "0" + a : a;
+        }
+
+        setInterval(function(){
+            var two_11 = new Date("2019-11-11T00:00:00");
+            var now = new Date();
+            var diff = parseInt((two_11.getTime() - now.getTime()) / 1000);
+            var day = parseInt(diff / (24 * 60 * 60));
+            var hour = parseInt(diff / (60 * 60) % 24);
+            var minute = parseInt(diff / 60 % 60);
+            var second = parseInt(diff % 60);
+            document.getElementById("d_day").innerText = toTwo(day);
+            document.getElementById("d_hour").innerText = toTwo(hour);
+            document.getElementById("d_minute").innerText = toTwo(minute);
+            document.getElementById("d_second").innerText = toTwo(second);
+        }, 1000);
+    </script>
+</body>
+</html>
