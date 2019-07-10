@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getMax(a, b){
+            console.log(arguments); // 类数组对象
+            console.log(arguments.length); // 实参个数
+            console.log(arguments.callee.length); // 形参个数
+            return a > b ? a : b; // 返回值 结束函数调用
+            console.log("over");
+        }
+        getMax(2, 3, 4);
+
+        function sum(n){
+            if(n < 1){
+                return 0;
+            }
+            return sum(n-1) + n; // 递归
+        }
+        console.log(sum(10));
+
+        // 斐波那契数列
+        // 1 1 2 3 5 8 13 21 34
+        function fb(n){
+            if(n == 1 || n == 2){
+                return 1;
+            }
+            return fb(n-1) + fb(n-2);
+        }
+        var str = "";
+        for(var i = 1; i < 30; i++){
+            str += fb(i) + ",";
+        }
+        console.log(str);
+    </script>
+</body>
+</html>

@@ -38,6 +38,7 @@
 |EventFlow|事件流
 |EventObj|事件对象
 |EventPrevent|阻止事件
+|Func|函数
 |LogicOper|逻辑运算符
 |Operator|运算符
 |Type|数据类型
