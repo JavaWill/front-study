@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 字面式创建对象
+        var stu = {
+            name: "wmj",
+            say: function(){
+                console.log(this.name + " say Hello");
+            }
+        };
+        stu.say();
+        // 构造函数创建
+        function person(name){
+            this.name = name;
+            this.say = function(){
+                console.log(this.name + " say Hi");
+            }
+        }
+        new person("wmj").say();
+
+        // 基本类型和引用类型的赋值
+        var a = 1;
+        var b = a;
+        b = 2;
+        console.log(a, b); // 1 2
+        var a_o = {x: 1};
+        var b_o = a_o;
+        b_o.x = 2;
+        console.log(a_o.x, b_o.x); // 2 2
+        var a_n = new Number(1);
+        a_n.x = 1;
+        var b_n = a_n;
+        b_n.x = 2;
+        console.log(a_n.x, b_n.x); // 2 2
+        
+        // String
+        var str = "sdjfksj1231sdfs";
+        console.log(str.length, str.indexOf("f"), str.lastIndexOf("f")); // 15 3 13
+        console.log(str.charAt(3), str.charCodeAt(3), String.fromCharCode(103)); // f 102 g
+        console.log(str.includes("1231"), str.startsWith("sdj"), str.endsWith("dfs")); // true true true
+        console.log(str.slice(3, 7), str.substring(3, 7), str.substr(3, 7)); // fksj fksj fksj123
+        console.log("He".concat("l".repeat(2)).concat("o")); // Hello
+        console.log("h e l l o".split(" ")); // ["h", "e", "l", "l", "o"]
+        console.log(" hello ".trim().toUpperCase()); // HELLO
+        console.log("HellO".toLocaleLowerCase()); // hello
+
+        /*
+            查询：indexOf、lastIndexOf、charAt、charCodeAt、match、search
+            增删改：repeat、concat、slice、substring、substr、split、replace
+            判断：includes、startsWith、endsWith
+            其他：toUpperCase、toLowerCase、toLocaleUpperCase、toLocaleLowerCase、trim
+
+            ES6：repeat、includes
+        */
+
+    </script>
+</body>
+</html>

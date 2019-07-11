@@ -23,7 +23,7 @@
         var arr = ["wmj"];
         arr.push("lp", "wxh"); // 尾部添加
         arr.unshift("tzmy", "zc"); // 头部添加
-        arr.unshift("tzy");
+        console.log(arr.unshift("tzy")); // 6 返回当前数组长度
         console.log(arr); // ["tzy", "tzmy", "zc", "wmj", "lp", "wxh"]
         arr.pop(); // 尾部删除
         arr.shift(); // 头部删除
@@ -61,8 +61,8 @@
         console.log(arr); // ["wmj_0", "wmj_1"]
         arr.sort((a, b) => b.slice("4") - a.slice("4")); // 排序
         console.log(arr); // ["wmj_1", "wmj_0"]
-        console.log(arr.reduce(function(prev, value){return prev + value})); // wmj_1wmj_0 累加
-        console.log(arr.reduceRight((prev, value) => prev + value), "first"); // wmj_0wmj_1 first 从右往左累加
+        console.log(arr.reduce(function(prev, value){return prev + value},"f_")); // f_wmj_1wmj_0 缩减
+        console.log(arr.reduceRight((prev, value) => prev + value, "f_")); // f_wmj_0wmj_1 从右往左
         arr = Array.of("wmj").concat("wmc", Array.from({0: "lp", 1: "tzy", length: 2})).copyWithin(0, 2, 4);
         console.log(arr); // ["lp", "tzy", "lp", "tzy"]
         /*

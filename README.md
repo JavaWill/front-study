@@ -43,6 +43,7 @@
 |EventPrevent|阻止事件
 |Func|函数
 |LogicOper|逻辑运算符
+|Object|对象
 |Operator|运算符
 |Type|数据类型
 ## img
