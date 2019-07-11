@@ -26,6 +26,7 @@
 ## JavaScript
 |xxx.html|内容
 |:-|:-:|
+|Array|数组
 |Bom|浏览器对象模型
 |Comparator|比较运算符
 |ControlOper|控制运算符
@@ -34,6 +35,7 @@
 |DomOper|DOM操作
 |DomStruct|DOM结构
 |ElementAttribute|节点属性操作
+|ES6.html|ES6特性
 |Event|事件
 |EventFlow|事件流
 |EventObj|事件对象

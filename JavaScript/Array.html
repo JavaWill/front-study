@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // create array
+        var a_0 = [];
+        var a_1 = [1, "w", 0.5, false];
+        var a_2 = new Array();
+        var a_3 = new Array(3);
+        var a_4 = new Array(2, 3, "w");
+        for(var i = 0; i < 5; i++){
+            console.log(window['a_' + i]);
+        }
+
+        // operate array
+        // slice、concat、filter、map不会改变原有数组
+        var arr = ["wmj"];
+        arr.push("lp", "wxh"); // 尾部添加
+        arr.unshift("tzmy", "zc"); // 头部添加
+        arr.unshift("tzy");
+        console.log(arr); // ["tzy", "tzmy", "zc", "wmj", "lp", "wxh"]
+        arr.pop(); // 尾部删除
+        arr.shift(); // 头部删除
+        console.log(arr.valueOf()); // ["tzmy", "zc", "wmj", "lp"]
+        arr.splice(2, 1, "wmj_1", "wmj_2"); // 删除/替换/添加
+        console.log(arr); // ["tzmy", "zc", "wmj_1", "wmj_2", "lp"]
+        arr = arr.slice(1, 3); // 截取返回新数组
+        console.log(arr); // ["zc", "wmj_1"]
+        arr.reverse(); // 反转
+        console.log(arr); // ["wmj_1", "zc"]
+        arr = arr.concat(["wmc"]); // 连接数组
+        console.log(arr); // ["wmj_1", "zc", "wmc"]
+        arr.fill("wmj", 1); // 填充
+        console.log(arr); // ["wmj", "wmj"]
+        arr = arr.filter(function(value){ // 过滤返回新数组
+            if(value === "wmj"){
+                return true;
+            } else {
+                return false;
+            }
+        });
+        console.log(arr); // ["wmj_1"]
+        console.log(arr.find(function(value){ return value === "wmj" ? true : false; })); // wmj
+        console.log(arr.findIndex(function(value){ return value === "wmj" ? true : false; })); // 0
+        console.log(arr.includes("wmj", 1)); // true
+        arr = arr.map(function(value, index){ // 遍历返回新数组
+            return value + index;
+        });
+        console.log(arr); // ["wmj0", "wmj1"]
+        console.log(arr.join(" - ")); // wmj0 - wmj1
+        console.log(arr.toString()); // wmj0,wmj1
+        console.log(arr.some(function(value){ return value === "wmj0" ? true : false; })); // true 是否存在符合条件的元素
+        console.log(arr.every(function(value){ return value === "wmj0" ? true : false; })); // false 是否所有元素都符合条件
+        arr.forEach(function(value, index){ arr.splice(index, 1, "wmj_" + index); }); // 遍历
+        console.log(arr); // ["wmj_0", "wmj_1"]
+        arr.sort((a, b) => b.slice("4") - a.slice("4")); // 排序
+        console.log(arr); // ["wmj_1", "wmj_0"]
+        console.log(arr.reduce(function(prev, value){return prev + value})); // wmj_1wmj_0 累加
+        console.log(arr.reduceRight((prev, value) => prev + value), "first"); // wmj_0wmj_1 first 从右往左累加
+        arr = Array.of("wmj").concat("wmc", Array.from({0: "lp", 1: "tzy", length: 2})).copyWithin(0, 2, 4);
+        console.log(arr); // ["lp", "tzy", "lp", "tzy"]
+        /*
+            增删改：push、pop、shift、unshift、splice、slice、fill、concat、copyWithin
+            查找：find、findIndex、indexOf、lastIndexOf
+            判断：every、some、includes、Array.isArray
+            遍历：forEach、filter、map、reduce、reduceRight
+            其他：join、reverse、sort、Array.from、toString、valueOf、Array.of
+
+            ES6: Array.of、Array.from、fill、copyWithin、includes、find、findIndex
+        */
+    </script>
+</body>
+</html>

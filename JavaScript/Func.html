@@ -17,6 +17,15 @@
         }
         getMax(2, 3, 4);
 
+        var obj = {};
+        obj[0] = "0"; // 0 -> "0" ?
+        obj["1"] = "1";
+        obj.a = "a";
+        obj["b"] = "b";
+        console.log(obj["0"] + "-" + obj[1] + "-" + obj.b + "-" + obj["a"]);
+        obj.length = 4;
+        console.log(Array.from(obj)); // obj -> array , must have 'length' property
+
         function sum(n){
             if(n < 1){
                 return 0;
