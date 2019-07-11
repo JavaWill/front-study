@@ -35,7 +35,7 @@
 |DomOper|DOM操作
 |DomStruct|DOM结构
 |ElementAttribute|节点属性操作
-|ES6.html|ES6特性
+|ES6|ES6特性
 |Event|事件
 |EventFlow|事件流
 |EventObj|事件对象
