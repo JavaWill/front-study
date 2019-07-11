@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [3, 5, 12, 1, 6, 23, 45, 100, 34];
+
+        // 选择排序
+        // for(var i = 0; i < arr.length; i++){
+        //     for(var j = i + 1; j < arr.length; j++){
+        //         if(arr[j] < arr[i]){
+        //             [arr[i], arr[j]] = [arr[j], arr[i]];
+        //         }
+        //     }
+        // }
+
+        // 冒泡排序
+        for(var i = 0; i < arr.length; i++){
+            for(var j = 0; j < arr.length - i - 1; j++){
+                if(arr[j] > arr[j+1]){
+                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+                }
+            }
+        }
+
+        console.log(arr);
+
+    </script>
+</body>
+</html>

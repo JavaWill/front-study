@@ -26,6 +26,7 @@
 ## JavaScript
 |xxx.html|内容
 |:-|:-:|
+|Algorithm|算法
 |Array|数组
 |Bom|浏览器对象模型
 |Comparator|比较运算符
