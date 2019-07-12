@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var now = new Date();
+        // now = Date.now();
+        console.log(now.getFullYear()); // 年
+        console.log(now.getMonth()); // 月-1
+        console.log(now.getDate()); // 日/30
+        console.log(now.getDay()); // 日/7
+        console.log(now.getHours()); // 小时/24
+        console.log(now.getMinutes()); // 分钟
+        console.log(now.getSeconds()); // 秒
+        console.log(now.getMilliseconds()); // 毫秒
+        console.log(now.getTime()); // 时间戳
+
+        console.log(now.getUTCHours()); // 0时区
+        console.log(now.getTimezoneOffset()); // -480
+
+        function dateToStr(d){
+            var year = d.getFullYear()
+            var month = toTwo(d.getMonth() + 1);
+            var day = toTwo(d.getDate());
+            var day7 = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"][d.getDay() - 1];
+            var hour = toTwo(d.getHours());
+            var minute = toTwo(d.getMinutes());
+            var second = toTwo(d.getSeconds());
+            return `${year}年${month}月${day}日 ${day7} ${hour}:${minute}:${second}`;
+        }
+        function toTwo(a){
+            return a < 10 ? "0" + a : a;
+        }
+        console.log(new Date());
+        console.log(dateToStr(new Date()));
+        console.log(dateToStr(new Date("2018-5-5 3:3:3")));
+        console.log(dateToStr(new Date("2017-06-01T06:05:59")));
+        console.log(dateToStr(new Date("2016/3/4 06:05:59")));
+        console.log(dateToStr(new Date(Date.parse("2015/3/4 1:1:1"))));
+    </script>
+</body>
+</html>

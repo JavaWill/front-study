@@ -32,6 +32,7 @@
 
         // 可变参数
         var addAll = (...all) => {
+            // console.log(arguments); // arguments is not defined
             var sum = 0;
             for(var i = 0; i < all.length; i++){
                 sum += all[i];
@@ -90,6 +91,33 @@
         // 重命名
         var {xx: x, yy: y} = {xx: "xx", yy: "yy"};
         console.log(x, y); // xx yy
+
+        // 简写
+        var xy = {
+            x,
+            y,
+            show(){
+                console.log(x, y);
+            }
+        };
+        xy.show(); // xx yy
+
+        // 严格相等
+        console.log(NaN === NaN); // false
+        console.log(+0 === -0); // true
+        console.log(Object.is(NaN, NaN)); // true
+        console.log(Object.is(+0, -0)); // false
+
+        // 浅复制
+        var obj_1 = {a: "a", b: "b"};
+        var obj_2 = {c: "c", d: { name: "d_name"}};
+        console.log(Object.assign(obj_1, obj_2), obj_1, obj_2);
+        obj_2.d.name = "d_d";
+        console.log(obj_1.d.name); // d_d
+
+        // 对象键值数组
+        console.log(Object.keys(obj_1)); // ["a", "b", "c", "d"]
+        console.log(Object.values(obj_1)); // ["a", "b", "c", {name: "d_d"}]
     </script>
 </body>
 </html>
