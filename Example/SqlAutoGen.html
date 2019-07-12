@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function addColumn(){
+            var columns = document.getElementById("columns");
+            var li = document.createElement("li");
+
+            addTextInput("columnName","Name", li);
+
+            var columnMysqlTypeSelect = document.createElement("select");
+            addSelectOption("INT", columnMysqlTypeSelect);
+            addSelectOption("BIGINT", columnMysqlTypeSelect);
+            addSelectOption("TINYINT", columnMysqlTypeSelect);
+            addSelectOption("VARCHAR", columnMysqlTypeSelect);
+            addSelectOption("DATE", columnMysqlTypeSelect);
+            addSelectOption("TIME", columnMysqlTypeSelect);
+            addSelectOption("DATETIME", columnMysqlTypeSelect);
+            addSelectOption("TIMESTAMP", columnMysqlTypeSelect);
+            addSelectOption("TEXT", columnMysqlTypeSelect);
+            columnMysqlTypeSelect.name = "columnMysqlType";
+            li.innerHTML += "MysqlType:";
+            li.appendChild(columnMysqlTypeSelect);
+
+            var columnOracleTypeSelect = document.createElement("select");
+            addSelectOption("NUMBER", columnOracleTypeSelect);
+            addSelectOption("VARCHAR2", columnOracleTypeSelect);
+            addSelectOption("DATE", columnOracleTypeSelect);
+            addSelectOption("TIMESTAMP", columnOracleTypeSelect);
+            addSelectOption("CLOB", columnOracleTypeSelect);
+            columnOracleTypeSelect.name = "columnOracleType";
+            li.innerHTML += "OracleType:";
+            li.appendChild(columnOracleTypeSelect);
+
+            addTextInput("columnLength", "Length", li);
+
+            addRadioInput("columnPrimaryKey", "", "PrimaryKey", li);
+
+            var columnAllowNullSelect = document.createElement("select");
+            addSelectOption("DEFAULT NULL", columnAllowNullSelect);
+            addSelectOption("NOT NULL", columnAllowNullSelect);
+            columnAllowNullSelect.name = "columnAllowNull";
+            li.innerHTML += "AllowNull:";
+            li.appendChild(columnAllowNullSelect);
+
+            addTextInput("columnComment", "Comment", li);
+
+            addInputButton("remove", removeColumn, li);
+
+            columns.appendChild(li);
+
+            // set onchange callback funcion to primary key radio, must after li appended to ul
+            var radios = document.getElementsByName("columnPrimaryKey");
+            for(var i = 0; i < radios.length; i++){
+                radios[i].onchange = function(){
+                    this.nextSibling.nextSibling.value="NOT NULL";
+                };
+            }
+        }
+        function addInputButton(value, fn, li){
+            var input = document.createElement("input");
+            input.type = "button";
+            input.value = value;
+            input.onclick = function(){
+                fn(li);
+            };
+            li.appendChild(input);
+        }
+        function addRadioInput(name, value, text, li){
+            var input = document.createElement("input");
+            input.name = name;
+            input.type = "radio";
+            input.value = value;
+            li.innerHTML += text + ":";
+            li.appendChild(input);
+        }
+        function addTextInput(name, text, li){
+            var input = document.createElement("input");
+            input.name = name;
+            li.innerHTML += text + ":";
+            li.appendChild(input);
+        }
+        function addSelectOption(type, select){
+            var option = document.createElement("option");
+            option.value = type;
+            option.textContent = type;
+            select.appendChild(option);
+        }
+        function removeColumn(li){
+            li.parentNode.removeChild(li);
+        }
+
+        function generateMysql(){
+            var columns = getAllColumns("Mysql");
+            var tableName = document.getElementsByName("table_name")[0].value.trim();
+            var tableComment = document.getElementsByName("table_comment")[0].value.trim();
+            createMysqlTable(columns, tableName, tableComment);
+        }
+        function getAllColumns(type){
+            var columnName = document.getElementsByName("columnName");
+            var columnType = document.getElementsByName("column" + type + "Type");
+            var columnLength = document.getElementsByName("columnLength");
+            var columnAllowNull = document.getElementsByName("columnAllowNull");
+            var columnPrimaryKey = document.getElementsByName("columnPrimaryKey");
+            var columnComment = document.getElementsByName("columnComment");
+            var columnArr = new Array();
+            for(var i = 0; i < columnName.length; i++){
+                var column = {};
+                column.name = columnName[i].value;
+                column.type = columnType[i].value;
+                column.length = columnLength[i].value;
+                if(columnPrimaryKey[i].checked){
+                    column.primaryKey = "Y";
+                }
+                column.allowNull = columnAllowNull[i].value;
+                column.comment = columnComment[i].value;
+                columnArr.push(column);
+            }
+            return columnArr;
+        }
+        function createMysqlTable(columns, tableName, tableComment){
+            var tableStr = "DROP TABLE IF EXISTS `" + tableName + "`;" + "<br>";
+            tableStr += "CREATE TABLE `" + tableName + "` (" + "<br>";
+            var primaryKey = "";
+            for(var i in columns){
+                var column = columns[i];
+                tableStr += getTab(2) + "`" + column.name + "`";
+                tableStr += getBlank(1) + column.type; 
+                if(column.type == "VARCHAR"){
+                    tableStr += "(" + column.length + ")";
+                }
+                tableStr += getBlank(1) + column.allowNull;
+                if(column.primaryKey == "Y"){
+                    tableStr += getBlank(1) + "AUTO_INCREMENT";
+                    primaryKey = "PRIMARY KEY (`" + column.name + "`)";
+                }
+                tableStr += getBlank(1) + "COMMENT" + getBlank(1) + "'" + column.comment + "'";
+                tableStr += "," + "<br>";
+            }
+            tableStr += getTab(2) +   primaryKey + "<br>";
+            tableStr += ") ENGINE=InnoDB DEFAULT CHARSET=utf4 COMMENT '" + tableComment + "';";
+            document.getElementById("result").innerHTML = tableStr;
+        }
+        function getBlank(num){
+            var str = "";
+            for(var i = 0; i < num; i++){
+                str += "&nbsp;"
+            }
+            return str;
+        }
+        function generateOracle(){
+            var columns = getAllColumns("Oracle");
+            var tableName = document.getElementsByName("table_name")[0].value.trim();
+            var tableComment = document.getElementsByName("table_comment")[0].value.trim();
+            createOracleTable(columns, tableName, tableComment);            
+        }
+        function createOracleTable(columns, tableName, tableComment){
+            tableName = tableName.toUpperCase();
+            var tableStr = "/*<br>";
+            tableStr += "BEGIN" + "<br>";
+            tableStr += getTab(2) + "EXECUTE IMMEDIATE 'DROP TABLE \"" + tableName + "\"'" + ";<br>";
+            tableStr += getTab(2) + "EXCEPTION WHEN OTHERS THEN NULL" + ";<br>";
+            tableStr += "END" + ";<br>" + "*/<br>";
+            tableStr += "CREATE TABLE \"" + tableName + "\"(" + "<br>";
+            var primaryKey = "";
+            var comments = "COMMENT ON TABLE \"" + tableName + "\" IS '" + tableComment + "'" + ";<br>";
+            for(var i in columns){
+                var column = columns[i];
+                column.name = column.name.toUpperCase();
+                tableStr += getTab(2) + "\"" + column.name + "\"";
+                tableStr += getBlank(1) + column.type; 
+                if(column.type == "VARCHAR2" || column.type == "NUMBER"){
+                    tableStr += "(" + column.length + ")";
+                }
+                tableStr += getBlank(1) + column.allowNull;
+                if(column.primaryKey == "Y"){
+                    primaryKey = "ALTER TABLE \"" + tableName + "\" ADD CONSTRAINT \"PK_" + tableName + "\" PRIMARY KEY(\"" + column.name + "\")";
+                }
+                if(i < columns.length - 1){
+                    tableStr += ",";
+                } 
+                tableStr += "<br>";
+                comments += "COMMENT ON COLUMN \"" + tableName + "\".\"" + column.name + "\" IS '" + column.comment + "'" + ";<br>";
+            }
+            tableStr += ");<br>";
+            tableStr += primaryKey + ";<br>";
+            tableStr += comments;
+            document.getElementById("result").innerHTML = tableStr;
+        }
+        function generateMySqlIbatisUseOracleType(){
+            var columns = getAllColumns("Oracle");
+            var tableName = document.getElementsByName("table_name")[0].value.trim();
+            var className = document.getElementsByName("class_name")[0].value.trim();
+            var classMap = className + "Map";
+            var tableAlias = "t";
+            var selectSqlId = "select_" + className.toLowerCase() + "_column";
+            var conditionSqlId = "select_" + className.toLowerCase() + "_condition";
+
+            // sqlmap start
+            var dynamicSql = "&lt;?xml version=\"1.0\" encoding=\"UTF-8\" ?&gt;" + "<br>";
+            dynamicSql += "&lt;!DOCTYPE sqlMap PUBLIC \"-//ibatis.apache.org//DTD SQL Map 2.0//EN\" \"http://ibatis.apache.org/dtd/sql-map-2.dtd\"&gt;" + "<br>";
+            dynamicSql += "&lt;sqlMap namespace=\"\"&gt;" + "<br>";
+
+            // generate typeAlias
+            dynamicSql += getTab(1) + "&lt;typeAlias type=\"com.xxx." + className + "\" alias=\"" + className + "\"/&gt;" + "<br>";
+
+            // generate resultMap
+            dynamicSql += getTab(1) + "&lt;resultMap class=\"" + className + "\" id=\"" + classMap + "\"&gt;" + "<br>";
+            for(var i in columns){
+                var column = columns[i];
+                dynamicSql += getTab(2) + "&lt;result column=\"" + column.name + "\" property=\"" + column.name + "\"/&gt;" + "<br>";
+            }
+            dynamicSql += getTab(1) + "&lt;/resultMap&gt;" + "<br>";
+
+            // generate select column sql 
+            dynamicSql += getTab(1) + "&lt;sql id=\"" + selectSqlId + "\"&gt;" + "<br>";
+            for(var i in columns){
+                dynamicSql += getTab(2) + tableAlias + "." + columns[i].name;
+                if(i < columns.length - 1){
+                    dynamicSql += ","
+                }
+                dynamicSql += "<br>";
+            }
+            dynamicSql += getTab(1) + "&lt;/sql&gt;" + "<br>";
+
+            // generate select condition sql 
+            dynamicSql += getTab(1) + "&lt;sql id=\"" + conditionSqlId + "\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "1 = 1" + "<br>";
+            for(var i in columns){
+                if(columns[i].type == "VARCHAR2" || columns[i].type == "CLOB"){
+                    dynamicSql += getTab(2) + "&lt;isNotEmpty property=\"" + columns[i].name + "\"&gt;" + "<br>";
+                    dynamicSql += getTab(3) + "and " + tableAlias + "." + columns[i].name + " like concat('%', #" + columns[i].name + "#, '%')" + "<br>";
+                    dynamicSql += getTab(2) + "&lt;/isNotEmpty&gt;" + "<br>";
+                } else {
+                    dynamicSql += getTab(2) + "&lt;isNotNull property=\"" + columns[i].name + "\">" + "<br>";
+                    dynamicSql += getTab(3) + "and " + tableAlias + "." + columns[i].name + " = #" + columns[i].name + "#" + "<br>";
+                    dynamicSql += getTab(2) + "&lt;/isNotNull&gt;" + "<br>";
+                    // supply beginTime and endTime
+                    if(columns[i].type == "TIMESTAMP" || columns[i].type == "DATE"){
+                        dynamicSql += getTab(2) + "&lt;isNotNull property=\"startTime\">" + "<br>";
+                        dynamicSql += getTab(3) + "and " + tableAlias + "." + columns[i].name + " > #startTime#" + "<br>";
+                        dynamicSql += getTab(2) + "&lt;/isNotNull&gt;" + "<br>";
+                        dynamicSql += getTab(2) + "&lt;isNotNull property=\"endTime\">" + "<br>";
+                        dynamicSql += getTab(3) + "and #endTime# > " + tableAlias + "." + columns[i].name + "<br>";
+                        dynamicSql += getTab(2) + "&lt;/isNotNull&gt;" + "<br>";
+                    }
+                }
+            }
+            dynamicSql += getTab(1) + "&lt;/sql&gt;" + "<br>";
+
+            // generate get by id sql
+            dynamicSql += getTab(1) + "&lt;select id=\"get" + className + "ById\" parameterClass=\"Integer\" resultMap=\"" + classMap + "\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "select" + "<br>";
+            dynamicSql += getTab(3) + "&lt;include refid=\"" + selectSqlId + "\"&gt;&lt;/include&gt;" + "<br>";
+            dynamicSql += getTab(2) + "from" + "<br>";
+            dynamicSql += getTab(3) + tableName + " " + tableAlias + "<br>";
+            dynamicSql += getTab(2) + "where" + "<br>";
+            for(var i in columns){
+                if(columns[i].primaryKey == "Y"){
+                    dynamicSql += getTab(3) + tableAlias + "." + columns[i].name + " = #value#" + "<br>";
+                }
+            }
+            dynamicSql += getTab(1) + "&lt;/select&gt;" + "<br>";
+
+            // generate page query sql 
+            dynamicSql += getTab(1) + "&lt;select id=\"query" + className + "ByCondition\" parameterClass=\"Map\" resultMap=\"" + classMap + "\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "select" + "<br>";
+            dynamicSql += getTab(3) + "&lt;include refid=\"" + selectSqlId + "\"&gt;&lt;/include&gt;" + "<br>";
+            dynamicSql += getTab(2) + "from" + "<br>";
+            dynamicSql += getTab(3) + tableName + " " + tableAlias + "<br>";
+            dynamicSql += getTab(2) + "where" + "<br>";
+            dynamicSql += getTab(3) + "&lt;include refid=\"" + conditionSqlId + "\"&gt;&lt;/include&gt;" + "<br>";
+            dynamicSql += getTab(1) + "&lt;/select&gt;" + "<br>";
+
+            // generate count sql
+            dynamicSql += getTab(1) + "&lt;select id=\"query" + className + "CountByCondition\" parameterClass=\"Map\" resultMap=\"Integer\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "select" + "<br>";
+            dynamicSql += getTab(3) + "count(1)" + "<br>";
+            dynamicSql += getTab(2) + "from" + "<br>";
+            dynamicSql += getTab(3) + tableName + " " + tableAlias + "<br>";
+            dynamicSql += getTab(2) + "where" + "<br>";   
+            dynamicSql += getTab(3) + "&lt;include refid=\"" + conditionSqlId + "\"&gt;&lt;/include&gt;" + "<br>";
+            dynamicSql += getTab(1) + "&lt;/select&gt;" + "<br>";
+
+            // generate insert sql
+            dynamicSql += getTab(1) + "&lt;insert id=\"insert" + className + "\" parameterClass=\"" + className + "\">" + "<br>";
+            dynamicSql += getTab(2) + "insert into " + tableName + "(" + "<br>";
+            for(var i in columns){
+                if(columns[i].primaryKey != "Y"){
+                    dynamicSql += getTab(3) + columns[i].name;
+                    if(i < columns.length - 1){
+                        dynamicSql += ","
+                    }
+                    dynamicSql += "<br>";
+                }
+            }
+            dynamicSql += getTab(2) + ")" + "<br>";
+            dynamicSql += getTab(2) + "values (" + "<br>";
+            for(var i in columns){
+                if(columns[i].primaryKey != "Y"){
+                    dynamicSql += getTab(3) + "#" + columns[i].name + "#";
+                    if(i < columns.length - 1){
+                        dynamicSql += ","
+                    }
+                    dynamicSql += "<br>";
+                }
+            }
+            dynamicSql += getTab(2) + ")" + "<br>";
+            dynamicSql += getTab(1) + "&lt;/insert&gt;" + "<br>";
+
+            // generate update sql
+            dynamicSql += getTab(1) + "&lt;update id=\"update" + className + "ById\" parameterClass=\"" + className + "\">" + "<br>";
+            dynamicSql += getTab(2) + "update" + "<br>";
+            dynamicSql += getTab(3) + tableName + "<br>";
+            dynamicSql += getTab(2) + "set" + "<br>";
+            var primaryEqual = "";
+            for(var i in columns){
+                if(columns[i].primaryKey == "Y"){
+                    primaryEqual = columns[i].name + " = #" + columns[i].name + "#" + "<br>";
+                } else {
+                    dynamicSql += getTab(3) + "&lt;isNotNull property=\"" + columns[i].name + "\">" + "<br>";
+                    dynamicSql += getTab(4) + columns[i].name + " = #" + columns[i].name + "#," + "<br>";
+                    dynamicSql += getTab(3) + "&lt;/isNotNull&gt;" + "<br>";
+                }
+            }
+            dynamicSql += getTab(3) + primaryEqual;
+            dynamicSql += getTab(2) + "where" + "<br>";
+            dynamicSql += getTab(3) + primaryEqual;
+            dynamicSql += getTab(1) + "&lt;/update&gt;" + "<br>";
+
+            // generate delete by id sql
+            dynamicSql += getTab(1) + "&lt;delete id=\"delete" + className + "ById\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "delete" + "<br>";
+            dynamicSql += getTab(2) + "from" + "<br>";
+            dynamicSql += getTab(3) + tableName + "<br>";
+            dynamicSql += getTab(2) + "where" + "<br>";
+            dynamicSql += getTab(3) + "&lt;isNull property=\"value\"&gt;" + "<br>";
+            dynamicSql += getTab(4) + "1 = 2" + "<br>";
+            dynamicSql += getTab(3) + "&lt;/isNull&gt;" + "<br>";
+            dynamicSql += getTab(3) + "&lt;isNotNull property=\"value\"&gt;" + "<br>";
+            for(var i in columns){
+                if(columns[i].primaryKey == "Y"){
+                    dynamicSql += getTab(4) + columns[i].name + " = #value#" + "<br>";
+                }
+            }
+            dynamicSql += getTab(3) + "&lt;/isNotNull&gt;" + "<br>";
+            dynamicSql += getTab(1) + "&lt;/delete&gt;" + "<br>";
+
+            // generate delete by ids sql
+            dynamicSql += getTab(1) + "&lt;delete id=\"delete" + className + "ByIds\" parameterClass=\"Map\"&gt;" + "<br>";
+            dynamicSql += getTab(2) + "delete" + "<br>";
+            dynamicSql += getTab(2) + "from" + "<br>";
+            dynamicSql += getTab(3) + tableName + "<br>";
+            dynamicSql += getTab(2) + "where" + "<br>";
+            dynamicSql += getTab(3) + "&lt;isNull property=\"ids\"&gt;" + "<br>";
+            dynamicSql += getTab(4) + "1 = 2" + "<br>";
+            dynamicSql += getTab(3) + "&lt;/isNull&gt;" + "<br>";
+            dynamicSql += getTab(3) + "&lt;isNotNull property=\"ids\"&gt;" + "<br>";
+            for(var i in columns){
+                if(columns[i].primaryKey == "Y"){
+                    dynamicSql += getTab(4) + columns[i].name + " in" + "<br>";
+                    dynamicSql += getTab(4) + "&lt;iterate property=\"ids\" conjunction=\",\" open=\"(\" close=\")\"&gt;" + "<br>";
+                    dynamicSql += getTab(5) + "#ids[]#" + "<br>";
+                    dynamicSql += getTab(4) + "&lt;/iterate&gt;" + "<br>";
+                }
+            }
+            dynamicSql += getTab(3) + "&lt;/isNotNull&gt;" + "<br>";
+            dynamicSql += getTab(1) + "&lt;/delete&gt;" + "<br>";
+
+            // sqlMap end
+            dynamicSql += "&lt;/sqlMap&gt;" + "<br>";
+
+            document.getElementById("result").innerHTML = dynamicSql;
+        }
+        function getTab(num){
+            var tabBalank = document.getElementsByName("tab_blank")[0].value;
+            var str = "";
+            for(var i = 0; i < num * tabBalank; i++){
+                str += "&nbsp;"
+            }
+            return str;
+        }
+    </script>
+</head>
+<body>
+    table_name:<input name="table_name"/> 
+    table_comment:<input name="table_comment"/> 
+    className:<input name="class_name"/>
+    tab_blank:<select name="tab_blank"><option value="1">1</option><option value="2">2</option><option value="4">4</option></select>
+    <input type="button" value="addColumn" onclick="addColumn()"/>
+    <ul id="columns">
+    </ul>
+    <input type="button" onclick="generateMysql()" value="generateMysql"/>
+    <input type="button" onclick="generateOracle()" value="generateOracle"/>
+    <input type="button" onclick="generateMySqlIbatisUseOracleType()" value="generateMySqlIbatisUseOracleType"/>
+    <input type="button" onclick="generateMySqlMbatisUseOracleType()" value="generateMySqlMbatisUseOracleType"/>
+    <p id="result"></p>
+</body>
+</html>

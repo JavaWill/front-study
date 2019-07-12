@@ -12,6 +12,7 @@
 |DynamicTable|动态创建表格
 |Magnifier|图片放大镜
 |MessageBoard|留言板
+|SqlAutoGen|动态生成sql
 |SwitchPic|图片切换
 ## HTML
 |xxx.html|内容
