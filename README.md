@@ -44,8 +44,10 @@
 |EventPrevent|阻止事件
 |Func|函数
 |LogicOper|逻辑运算符
+|Math|数学对象
 |Object|对象
 |Operator|运算符
+|String|字符串
 |Type|数据类型
 ## img
 > 统一放置图片

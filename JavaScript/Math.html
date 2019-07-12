@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 向上取整 ceiling 天花板
+        console.log(Math.ceil(1.5)); // 2
+        console.log(Math.ceil(0.01)); // 1
+        console.log(Math.ceil(-5.5)); // -5
+        // 向下取整 floor 地板
+        console.log(Math.floor(1.5)); // 1
+        console.log(Math.floor(0.01)); // 0
+        console.log(Math.floor(-5.5)); // -6
+        // 四舍五入 round
+        console.log(Math.round(1.5)); // 2
+        console.log(Math.round(0.01)); // 0
+        console.log(Math.round(-5.5)); // -5
+        // x的y次幂 
+        console.log(Math.pow(2, 3)); // 8
+        // 随机数 random 随意的
+        for(var i = 0; i < 5; i++){
+            console.log(Math.random()); // [0, 1)
+        }
+        
+        // min <= value <= max
+        function rand(min, max){
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        for(var i = 0; i < 20; i++){
+            console.log(rand(5, 8));
+        }
+    </script>
+</body>
+</html>

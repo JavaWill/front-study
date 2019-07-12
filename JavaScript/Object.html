@@ -39,27 +39,6 @@
         var b_n = a_n;
         b_n.x = 2;
         console.log(a_n.x, b_n.x); // 2 2
-        
-        // String
-        var str = "sdjfksj1231sdfs";
-        console.log(str.length, str.indexOf("f"), str.lastIndexOf("f")); // 15 3 13
-        console.log(str.charAt(3), str.charCodeAt(3), String.fromCharCode(103)); // f 102 g
-        console.log(str.includes("1231"), str.startsWith("sdj"), str.endsWith("dfs")); // true true true
-        console.log(str.slice(3, 7), str.substring(3, 7), str.substr(3, 7)); // fksj fksj fksj123
-        console.log("He".concat("l".repeat(2)).concat("o")); // Hello
-        console.log("h e l l o".split(" ")); // ["h", "e", "l", "l", "o"]
-        console.log(" hello ".trim().toUpperCase()); // HELLO
-        console.log("HellO".toLocaleLowerCase()); // hello
-
-        /*
-            查询：indexOf、lastIndexOf、charAt、charCodeAt、match、search
-            增删改：repeat、concat、slice、substring、substr、split、replace
-            判断：includes、startsWith、endsWith
-            其他：toUpperCase、toLowerCase、toLocaleUpperCase、toLocaleLowerCase、trim
-
-            ES6：repeat、includes
-        */
-
     </script>
 </body>
 </html>
