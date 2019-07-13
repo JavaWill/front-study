@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: crimson;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" onclick="animateRight(this, 100, 5);">
+        <button>向右移动</button>
+    </div>
+    <script>
+        function animateRight(ele, distance, seconds){
+            var timePerStep = 10; // 每一步的间隔时间 ms
+            var step = seconds * 1000 / timePerStep; // 一共走几步
+            var distancePerStep = distance / step; // 每一步的距离 px
+            if(distancePerStep < 1){ // 每一步最小移动距离1px
+                distancePerStep = 1;
+                step =  distance / distancePerStep;
+                timePerStep = seconds * 1000 / step;
+            }
+            console.log(distancePerStep, step, timePerStep);
+            if(ele.interval){
+                clearInterval(ele.interval);
+            }
+            ele.startTime = new Date().getTime();
+            ele.interval = setInterval(()=>{
+                ele.style.left = ele.offsetLeft + distancePerStep + "px";
+                if(ele.offsetLeft >= distance){
+                    clearInterval(ele.interval);
+                    var endTime = new Date().getTime();
+                    console.log(`animate cost time: ${endTime-ele.startTime}ms`);
+                    return ;
+                }
+            }, timePerStep);
+        }
+    </script>
+</body>
+</html>

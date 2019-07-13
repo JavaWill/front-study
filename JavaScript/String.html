@@ -17,6 +17,8 @@
         console.log("h e l l o".split(" ")); // ["h", "e", "l", "l", "o"]
         console.log(" hello ".trim().toUpperCase()); // HELLO
         console.log("HellO".toLocaleLowerCase()); // hello
+        console.log(str.search("sj1"), str.match(/sd/g)); // 5 ["sd", "sd"]
+        console.log(str.replace(/s/g, "S"), str);
 
         /*
             查询：indexOf、lastIndexOf、charAt、charCodeAt、match、search
@@ -37,19 +39,24 @@
         var [,age] = params[1].split("=");
         console.log(name, age); // wmj 23
 
-        // 模板字符串
+        // 模板字符串 嵌入变量
         var model = `name:${name},age:${age}`;
         console.log(model); // name:wmj,age:23
-        // 带标签的模板字符串
+        console.log(String.raw`${name}--${age}`); // wmj--23
+        // 标签模板 Tagged Template
         function tagModel(strings, name, age){
-            console.log(strings, name, age); // ["name:", ",age:", "", raw: Array(3)] "wmj" "23"
+            console.log(strings, name, age); 
         }
-        tagModel`name:${name},age:${age}`;
+        tagModel`name:${name},age:${age}`; // ["name:", ",age:", "", raw: Array(3)] "wmj" "23"
         // 多行
-        var lines = `first line
-        second line`;
+        var lines = `
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+        `;
         console.log(lines);
-        // 插入表达式
+        // 插入表达式 
         var [a, b] = [3, 4];
         console.log(`a+b=${a+b}`); // a+b=7
         // 嵌套模板

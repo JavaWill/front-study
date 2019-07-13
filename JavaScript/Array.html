@@ -9,12 +9,13 @@
 <body>
     <script>
         // create array
-        var a_0 = [];
-        var a_1 = [1, "w", 0.5, false];
-        var a_2 = new Array();
-        var a_3 = new Array(3);
-        var a_4 = new Array(2, 3, "w");
-        for(var i = 0; i < 5; i++){
+        var a_0 = []; // []
+        var a_1 = [1, "w", 0.5, false]; // [1, "w", 0.5, false]
+        var a_2 = new Array(); // []
+        var a_3 = new Array(3); // [empty × 3]
+        var a_4 = new Array(2, 3, "w"); // [2, 3, "w"]
+        var a_5 = Array.of(3); // [3]
+        for(var i = 0; i < 6; i++){
             console.log(window['a_' + i]);
         }
 

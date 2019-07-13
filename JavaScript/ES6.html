@@ -10,7 +10,7 @@
     <script>
         // max(); // Uncaught TypeError: max is not a function
 
-        // 箭头函数+传参默认值
+        // 箭头函数 传参默认值
         var max = (a=0, b=0) => { 
             console.log(a > b ? a : b);
         }
@@ -30,7 +30,7 @@
         var add = (a, b) => a + b;
         console.log(add(2, 3));
 
-        // 可变参数
+        // 不定参数
         var addAll = (...all) => {
             // console.log(arguments); // arguments is not defined
             var sum = 0;
@@ -45,6 +45,7 @@
         var stu = () => ({name: "wmj", age: "23"});
         console.log(stu());
 
+        // this解释时绑定
         var person = {
             p_name: "wmc",
             printName: function(){
@@ -108,7 +109,7 @@
         console.log(Object.is(NaN, NaN)); // true
         console.log(Object.is(+0, -0)); // false
 
-        // 浅复制
+        // 浅拷贝
         var obj_1 = {a: "a", b: "b"};
         var obj_2 = {c: "c", d: { name: "d_name"}};
         console.log(Object.assign(obj_1, obj_2), obj_1, obj_2);
