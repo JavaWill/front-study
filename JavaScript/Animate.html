@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <div id="box" onclick="animateRight(this, 100, 5);">
+    <div id="box" onclick="animateRight(this, 1000, 2);">
         <button>向右移动</button>
     </div>
     <script>
@@ -26,6 +26,12 @@
             var timePerStep = 10; // 每一步的间隔时间 ms
             var step = seconds * 1000 / timePerStep; // 一共走几步
             var distancePerStep = distance / step; // 每一步的距离 px
+            if(distance % step != 0){
+                var decimal = distancePerStep.toString().split(".")[1].length;
+                distancePerStep *= Math.pow(10, decimal);
+                step = distance / distancePerStep;
+                timePerStep = seconds * 1000 / step;
+            }
             if(distancePerStep < 1){ // 每一步最小移动距离1px
                 distancePerStep = 1;
                 step =  distance / distancePerStep;
