@@ -15,10 +15,13 @@
                 * !important > 行内样式 > id > class > tag
                 * 如果出现复杂的选择器，排除!important和行内样式，根据“id数量-class数量-tag数量”来决定优先级
                 * 继承的样式优先级最低（无论继承的父类的权重有多高）
-                * 如果出现“id数量-class数量-tag数量”相同的情况，遵循就近原则，越靠近元素的样式优先级越高
-                    （只比较最后一个选择器 见 .demo4 .demo6）
-                * 如果最后一个选择器一样近，就按照书写位置来（见 .demo1 .demo3）
-        */  
+                * 非继承情况，如果出现“id数量-class数量-tag数量”相同的情况，
+                    就近原则（按照书写顺序决定），后者优先级高（见 ul li.li_class）
+                * 继承情况，谁描述的近，就听谁的（见 .demo1 .demo3）
+                * 描述的近，指的是选择器的最后一个描述的近，而不是前面的（见 .demo4 .demo6）
+                * 如果描述的也一样，再通过“id数量-class数量-tag数量”确定优先级
+                * 如果仍然一样，则就近按照书写顺序确定优先级
+        */
         div{
             /* color: red !important; */
         }
@@ -49,21 +52,24 @@
             color: green;
         }
 
-        /* 0 2 0*/
-        .demo4 .demo6{
+        .demo1 .demo3{
             color: blue;
         }
-        /* 0 2 0*/
-        .demo4 .demo5{
+        .demo1 .demo2{
             color: red;
         }
 
-        /* 0 2 0*/
-        .demo2 .demo3{
+        .demo5 .demo6{
             color: blue;
         }
-        /* 0 2 0*/
-        .demo1 .demo3{
+        .demo4 .demo6{
+            color: red;
+        }
+
+        .demo7 div#demo8 .demo9{
+            color: blue;
+        }
+        .demo7 #demo8 div.demo9{
             color: red;
         }
         
@@ -82,7 +88,9 @@
         <div class="demo1">
             <div class="demo2">
                 <div class="demo3">
-                    demo
+                    <div>
+                        DEMO123
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +98,16 @@
             <div class="demo5">
                 <div class="demo6">
                     <div>
-                        DEMO
+                        DEMO456
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo7">
+            <div id="demo8">
+                <div class="demo9">
+                    <div>
+                        DEMO789
                     </div>
                 </div>
             </div>
