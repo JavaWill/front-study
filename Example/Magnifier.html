@@ -106,7 +106,12 @@
             big.style.display = "none";
         }
         function getCssProperty(el, propertyName){
-            return parseInt(window.getComputedStyle(el).getPropertyValue(propertyName));
+            if(window.getComputedStyle){
+                return parseInt(window.getComputedStyle(el).getPropertyValue(propertyName));
+            } else {
+                return parseInt(el.currentStyle[propertyName]);
+            }
+            
         }
     </script>
 </body>

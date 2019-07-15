@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: crimson;
+            position: relative;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+    </div>
+    <script>
+        var box = document.getElementById("box");
+
+        animate(box, {height: 300, width: 300, opacity: 0.3, left: 100, top: 50}, 1000, function(){
+            animate(box, {height: 50, width: 60, opacity: 0.7, left: 10, top: 10}, 2000);
+        });
+
+        function animate(ele, targetJson, time, callBack){
+            var allTime = time ? time : 1000;
+            var stepTime = 10; // 每一步的间隔，值为1、2、3时，速度明显变慢，总时间超出预期，why？
+            var step = allTime / stepTime; // 根据时间确定步数
+            var stepDistanceObj = {}; 
+            for(var key in targetJson){ // 计算步长，各属性值拥有各自的速度，尽量保证步数走完，每个属性值达到预期
+                stepDistanceObj[key] = (targetJson[key] - getCssProperty(ele, key)) / step;
+            }
+            console.log("speed: ", stepDistanceObj);
+            
+            var startTime = new Date();
+            ele.timer = setInterval(() => {
+                for(var key in targetJson){
+                    var prop = parseFloat(ele.style[key]) || getCssProperty(ele, key);
+                    var nextProp = prop + stepDistanceObj[key];
+                    if(key == "opacity"){
+                        ele.style[key] = nextProp;
+                    }
+                    if(key == "width" || key == "height"){
+                        ele.style[key] = nextProp + "px";
+                    }
+                    if(key == "left" || key == "top"){
+                        if(ele.style.position != "relative"){
+                            ele.style.position = "relative";
+                        }
+                        ele.style[key] = nextProp + "px";
+                    }
+                    // 边界条件，当前属性值不足以再走一步
+                    if(Math.abs(ele.style[key] - targetJson[key]) < Math.abs(stepDistanceObj[key])){
+                        clearInterval(ele.timer);
+                        ele.timer = null;
+                        // 属性值误差清除
+                        for(var key in targetJson){
+                            if(key == "opacity"){
+                                ele.style[key] = targetJson[key];
+                            } else {
+                                ele.style[key] = targetJson[key] + "px";
+                            }
+                        }
+                        console.log(`animate cost time: ${new Date() - startTime}ms`);
+                        if(callBack){
+                            callBack();
+                        }
+                        return;
+                    }
+                    
+                }
+            }, stepTime);
+        }
+
+        function getCssProperty(el, propertyName){
+            if(window.getComputedStyle){
+                return parseFloat(window.getComputedStyle(el).getPropertyValue(propertyName));
+            } else {
+                return parseFloat(el.currentStyle[propertyName]);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -9,48 +9,91 @@
         body{
             margin: 0;
         }
-        #box{
+        .box{
             width: 100px;
             height: 100px;
             background: crimson;
             position: relative;
+            opacity: 1;
+        }
+        .box:nth-child(2){
+            background: gray;
         }
     </style>
 </head>
 <body>
-    <div id="box" onclick="animateRight(this, 1000, 2);">
+    <div class="box" onclick="animateRight(this, 500, 4);">
         <button>向右移动</button>
     </div>
+    <div class="box" onmouseover="fadeOut(this)" onmouseout="fadeIn(this)"></div>
     <script>
         function animateRight(ele, distance, seconds){
             var timePerStep = 10; // 每一步的间隔时间 ms
             var step = seconds * 1000 / timePerStep; // 一共走几步
             var distancePerStep = distance / step; // 每一步的距离 px
-            if(distance % step != 0){
-                var decimal = distancePerStep.toString().split(".")[1].length;
-                distancePerStep *= Math.pow(10, decimal);
-                step = distance / distancePerStep;
-                timePerStep = seconds * 1000 / step;
-            }
-            if(distancePerStep < 1){ // 每一步最小移动距离1px
-                distancePerStep = 1;
-                step =  distance / distancePerStep;
-                timePerStep = seconds * 1000 / step;
-            }
-            console.log(distancePerStep, step, timePerStep);
-            if(ele.interval){
-                clearInterval(ele.interval);
-            }
-            ele.startTime = new Date().getTime();
+            // if(distance % step != 0){
+            //     var decimal = distancePerStep.toString().split(".")[1].length;
+            //     distancePerStep *= Math.pow(10, decimal);
+            //     step = distance / distancePerStep;
+            //     timePerStep = seconds * 1000 / step;
+            // }
+            // if(distancePerStep < 1){ // 每一步最小移动距离1px
+            //     distancePerStep = 1;
+            //     step =  distance / distancePerStep; // 根据距离确定步数
+            //     timePerStep = seconds * 1000 / step;
+            // }
+            // console.log(distancePerStep, step, timePerStep);
+            var startTime = new Date().getTime();
             ele.interval = setInterval(()=>{
-                ele.style.left = ele.offsetLeft + distancePerStep + "px";
-                if(ele.offsetLeft >= distance){
+                var left = ele.style.left;
+                if(left){
+                    ele.style.left = parseFloat(left.slice(0, left.indexOf("px"))) + distancePerStep + "px";
+                } else {
+                    ele.style.left = ele.offsetLeft + distancePerStep + "px";
+                }
+                if(ele.offsetLeft > distance){
                     clearInterval(ele.interval);
+                    ele.interval = null;
+                    ele.style.left = distance + "px";
                     var endTime = new Date().getTime();
-                    console.log(`animate cost time: ${endTime-ele.startTime}ms`);
+                    console.log(`animate cost time: ${endTime-startTime}ms`);
                     return ;
                 }
             }, timePerStep);
+        }
+        
+        function fadeOut(ele){
+            if(ele.interval){
+                clearInterval(ele.interval);
+                ele.interval = null;
+            }
+            ele.interval = setInterval(() => {
+                if(!ele.style.opacity){
+                    ele.style.opacity = 1;
+                }
+                if(ele.style.opacity - 0.01  <= 0){
+                    ele.style.opacity = 0.01;
+                    return;
+                }
+                ele.style.opacity -= 0.01;
+            }, 10);
+        }
+
+        function fadeIn(ele){
+            if(!ele.style.opacity){
+                ele.style.opacity = 0.01;
+            }
+            if(ele.interval){
+                clearInterval(ele.interval);
+                ele.interval = null;
+            }
+            ele.interval = setInterval(() => {
+                if(Number(ele.style.opacity) + 0.01 > 1){
+                    ele.style.opacity = 1;
+                    return;
+                }
+                ele.style.opacity = Number(ele.style.opacity) + 0.01;
+            }, 10);
         }
     </script>
 </body>

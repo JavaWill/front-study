@@ -7,6 +7,7 @@
 ## Example
 |xxx.html|内容
 |:-|:-:|
+|Animate|动画
 |Clock|模拟时钟
 |Drag|模拟拖动
 |DynamicTable|动态创建表格
