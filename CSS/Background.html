@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div:first-child{
+            width: 600px;
+            height: 800px;
+            background-color: chocolate;
+            background-image: url(../img/3.jpg);
+            background-repeat: no-repeat;
+            background-position: bottom right; /* 不设置时默认为 left top */
+            background-position: right;  /* 只设置一个，另外一个默认是 center */
+            background-position: 10px 30px; /* 如果设置了数值，第一个是left，第二个是top */
+            background-position: 10px center;
+            background-attachment: fixed; /* 是否随内容滚动，默认scroll */
+            background: chocolate url(../img/3.jpg) no-repeat fixed 80px center; /* 缩写 */
+        }
+        p{
+            width: 100px;
+            background: rgba(82, 180, 167, 0.5);
+        }
+        div:nth-child(2){
+            position: relative;
+            left: 300px;
+            width: 200px;
+            height: 150px;
+            /* 多背景设置时，颜色不能写在第一个 */
+            background: url(../img/1.jpg) left top no-repeat purple;
+                /* url(../img/4.gif) right bottom no-repeat purple; */
+            background-size: 100px 50px; /* 宽、高 */
+            background-size: 100px; /* 高为auto，等比例缩放 */
+            background-size: 50%; /* 最长边百分比，短边等比例缩放 */
+            background-size: cover; /* 效果同100%，宽高比不同导致的溢出部分会隐藏 */
+            background-size: contain; /* 整张图片完全呈现，比例不同会有留白 */
+        }
+        div:last-child{
+            position: relative;
+            left: 300px;
+            width: 400px;
+            height: 300px;
+            /* 多背景设置，第一个参数不能是颜色 */
+            background: url(../img/2.jpg) no-repeat,
+                url(../img/4.gif) no-repeat right bottom purple;
+            background-size: 50%, contain;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中，在2009年与2010年蝉联NBA常规赛最有价值球员（MVP）。2010年，詹姆斯转会至迈阿密热火队。2012年，詹姆斯得到NBA个人生涯的第3座常规赛MVP，第1个总冠军和总决赛MVP，并代表美国男篮获得了伦敦奥运会金牌，追平了迈克尔·乔丹在1992年所创的纪录。2013年，詹姆斯获得第4个常规赛MVP、第2个NBA总冠军和第2个总决赛MVP，实现两连冠。2014年，詹姆斯回归骑士。2016年，詹姆斯带领骑士逆转战胜卫冕冠军勇士获得队史首个总冠军和个人第3个总决赛MVP。2018年7月10日，詹姆斯正式与湖人签下4年1.53亿美元的合同。</p>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+</body>
+</html>
