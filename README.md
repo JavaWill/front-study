@@ -4,7 +4,9 @@
 |:-|:-:|
 |Background|背景
 |BlockAndInline|块元素和内联元素
+|CSS3|CSS3新特性
 |Selector|选择器
+|StylePriority|样式优先级
 ## Example
 |xxx.html|内容
 |:-|:-:|

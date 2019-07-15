@@ -31,21 +31,20 @@
             /* 多背景设置时，颜色不能写在第一个 */
             background: url(../img/1.jpg) left top no-repeat purple;
                 /* url(../img/4.gif) right bottom no-repeat purple; */
-            background-size: 100px 50px; /* 宽、高 */
-            background-size: 100px; /* 高为auto，等比例缩放 */
+            background-size: 100px 50px; /* 宽 高 */
+            background-size: 100px; /* 高为auto，按原始图片等比例缩放 */
             background-size: 50%; /* 最长边百分比，短边等比例缩放 */
             background-size: cover; /* 效果同100%，宽高比不同导致的溢出部分会隐藏 */
             background-size: contain; /* 整张图片完全呈现，比例不同会有留白 */
         }
         div:last-child{
-            position: relative;
+            position: relative; 
             left: 300px;
             width: 400px;
             height: 300px;
-            /* 多背景设置，第一个参数不能是颜色 */
-            background: url(../img/2.jpg) no-repeat,
-                url(../img/4.gif) no-repeat right bottom purple;
-            background-size: 50%, contain;
+            /* 多背景设置，第一个参数不能是颜色，建议放在最后 */
+            background: url(../img/2.jpg) no-repeat left top/50%,
+                url(../img/4.gif) no-repeat right bottom/contain rgb(240, 102, 60);
         }
     </style>
 </head>

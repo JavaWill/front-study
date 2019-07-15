@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 
+            层叠性：
+                一般情况下，出现样式冲突，按照书写顺序
+            继承性：
+                子标签继承父标签的部分样式，比如：font-xxx，line-xxx，color
+            优先级：
+                * !important > 行内样式 > id > class > tag
+                * 如果出现复杂的选择器，排除!important和行内样式，根据“id数量-class数量-tag数量”来决定优先级
+                * 继承的样式优先级最低（无论继承的父类的权重有多高）
+                * 如果出现“id数量-class数量-tag数量”相同的情况，遵循就近原则，越靠近元素的样式优先级越高
+                    （只比较最后一个选择器 见 .demo4 .demo6）
+                * 如果最后一个选择器一样近，就按照书写位置来（见 .demo1 .demo3）
+        */  
+        div{
+            /* color: red !important; */
+        }
+        #div_id{
+            color: green;
+        }
+        .div_class{
+            color: blue;
+        }
+        #div_id{
+            color: pink;
+        }
+
+        /* 0 1 2 */
+        .ul_class ul li{
+            color: blue;
+        }
+        /* 0 1 2 */
+        ul li.li_class{
+            color: pink;
+        }
+        /* 0 0 2 */
+        ul li{
+            color: red;
+        }
+        /* 0 0 1 */
+        li{
+            color: green;
+        }
+
+        /* 0 2 0*/
+        .demo4 .demo6{
+            color: blue;
+        }
+        /* 0 2 0*/
+        .demo4 .demo5{
+            color: red;
+        }
+
+        /* 0 2 0*/
+        .demo2 .demo3{
+            color: blue;
+        }
+        /* 0 2 0*/
+        .demo1 .demo3{
+            color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="div_id" class="div_class" style="color:orange">优先级</div>
+    <div class="ul_class">
+        <ul>
+            <li class="li_class">南京</li>
+            <li>武汉</li>
+            <li>上海</li>
+        </ul>
+    </div>
+    <div>
+        <div class="demo1">
+            <div class="demo2">
+                <div class="demo3">
+                    demo
+                </div>
+            </div>
+        </div>
+        <div class="demo4">
+            <div class="demo5">
+                <div class="demo6">
+                    <div>
+                        DEMO
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

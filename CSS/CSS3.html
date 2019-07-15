@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p{
+            color: #fff;
+            font-size: 50px;
+            font-family: fantasy;
+        }
+        p:first-child{
+            /* 水平位置 垂直位置 模糊距离 阴影颜色 */
+            text-shadow: 1px 1px 1px #000;
+        }
+        p:last-child{
+            text-shadow: -1px -1px 1px #000;
+        }
+        p:nth-child(2){
+            text-shadow: -3px 3px 2px rgb(216, 44, 44), 2px -2px 1px rgb(126, 57, 172);
+        }
+    </style>
+</head>
+<body>
+    <p>文字凸起</p>
+    <p>文字阴影</p>
+    <p>文字凹下</p>
+</body>
+</html>
