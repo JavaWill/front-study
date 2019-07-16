@@ -21,11 +21,15 @@
             width: 100px;
             height: 300px;
         }
-        /* 行内元素可设置四边padding并生效，margin只有左右能生效 */
+        /* 
+            行内元素可设置四边padding生效，margin只有左右能生效，由于没有宽，margin不能设置为auto水平居中 
+            左右padding会影响布局，上下padding不会影响，但是会影响整体大小和背景（上padding可能无效，也许是浏览器问题）
+        */
         strong{
             border: 2px rgb(156, 11, 132) solid;
             margin: 10px;
-            padding: 10px;
+            padding: 50px 10px;
+            background: gray;
         }
         /* 块元素四边padding和margin都生效，且内容可以自动换行，行内元素没有宽度，内容无换行 */
         p{

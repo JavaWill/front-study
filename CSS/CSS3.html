@@ -14,6 +14,14 @@
         p:first-child{
             /* 水平位置 垂直位置 模糊距离 阴影颜色 */
             text-shadow: 1px 1px 1px #000;
+            border: 5px solid green;
+            /* 边框圆角 左上 右上 右下 左下*/
+            border-radius: 1px 10px 50px 100px;
+            /* 
+                如何计算一个元素的总宽度和总高度，默认content-box：width = 内容的宽度
+                border-box：width = border + padding + 内容的宽度
+             */
+            box-sizing: content-box;
         }
         p:last-child{
             text-shadow: -1px -1px 1px #000;

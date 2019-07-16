@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        nav{
+            height: 41px;
+            border-top: 3px solid #ff8500;
+            border-bottom: 1px solid #edeef0;
+            background-color: #fcfcfc;
+        }
+        i{
+            font-style: normal;
+            padding: 10px;
+            display: inline-block;
+        }
+        i:hover, .tn-topmenulist ul>li:hover{
+            border-color: #edeef0;
+            background-color: #edeef0;
+            text-decoration: none;
+            color: #ff8400;
+        }
+        .tn-title{
+            position: relative;
+            display: inline-block;
+        }
+        .tn-topmenulist{
+            display: none;
+            position: absolute;
+            width: 112px;
+            border: 1px solid #ebbe7a;
+            border-bottom: none;
+        }
+        .tn-topmenulist ul{
+            margin: 0;
+            padding: 0;
+        }
+        .tn-topmenulist ul>li{
+            line-height: 31px;
+            list-style: none;
+            border-bottom: 1px solid #fecc5b;
+            padding-left: 10px;
+        }
+        .tn-title:hover .tn-topmenulist{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <i>
+            手机新浪网
+        </i>
+        <div class="tn-title">
+            <i>
+                移动客户端
+            </i>
+            <div class="tn-topmenulist">
+                <ul>
+                    <li>新浪微博</li>
+                    <li>新浪体育</li>
+                    <li>新浪财经</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

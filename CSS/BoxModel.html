@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div_border{
+            /* 内容宽度 */
+            width: 200px;
+            /* 内容高度 */
+            height: 200px;
+            /* vertical horizontal */
+            border-color: red blue;
+            /* top horizontal bottom */
+            border-width: 5px 10px 15px;
+            /* top | right | bottom | left */
+            border-style: double solid dotted dashed;
+            /* [border-width ||border-style ||border-color |inherit] */
+            /* border: 5px solid blue; */
+            /* 椭圆的半长轴，半短轴 */
+            border-radius: 10% / 40%;
+            /* 内边距 上 右 下 左 */
+            padding: 1px 10px 20px 30px;
+            /* 外边距 只有设置了宽度，auto参数才能生效，达到水平居中*/
+            margin: 10px auto;
+        }
+        table{
+            width: 300px;
+            height: 300px;
+            border: 1px solid green;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        tr{
+            /* 没效果 */
+            border: 1px dotted pink;
+        }
+        td{
+            border: 1px dashed black;
+        }
+        
+        /* 子元素margin-top和父元素margin-top合并（外边距塌陷），父元素需使用overflow: hidden;或者加padding/border解决此问题 */
+        .father{
+            width: 200px;
+            height: 200px;
+            background: forestgreen;
+            margin-top: 10px;
+            /* overflow: hidden; */
+            /* padding: 1px; */
+            /* border: 1px solid black; */
+        }
+        .son{
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            /* 
+                border-box：width = border + padding + 内容的宽度
+                可防止子元素宽度超出父元素：100% * father_content_width + padding > father_width 
+                注意子元素不要加margin
+            */
+            box-sizing: border-box;
+            background:firebrick;
+            margin-top: 30px;
+        }
+        /* 垂直顺序的元素也会有margin塌陷，这种情况只能尽量避免，没有解决途径 */
+        .div_a{
+            width: 100px;
+            height: 100px;
+            background:blue;
+            margin-bottom: 30px;
+        }
+        .div_b{
+            width: 100px;
+            height: 100px;
+            background:red;
+            margin-top: 30px;
+        }
+        .all_width{
+            border: 1px solid green;
+            padding-left: 100px;
+            /* 不指定内容宽度，元素的最大宽度就是父元素的宽度，如果设置了width: 100%，加上padding，元素的真实宽度超出screen */
+            /* width: 100%; */
+        }
+        .div_shadow{
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            /* x偏移量 | y偏移量 | 阴影模糊半径 | 阴影颜色 */
+            box-shadow: inset 1px 2px 5px red, 1em 0 .4em olive;
+        }
+    </style>
+</head>
+<body>
+    <div class="div_border"></div>
+    <table>
+        <tr>
+            <td>???</td>
+            <td>???</td>
+            <td>???</td>
+        </tr>
+        <tr>
+            <td>???</td>
+            <td>???</td>
+            <td>???</td>
+        </tr>
+        <tr>
+            <td>???</td>
+            <td>???</td>
+            <td>???</td>
+        </tr>
+    </table>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <div class="div_a">
+    </div>
+    <div class="div_b">
+    </div>
+    <div class="all_width">
+        全宽
+    </div>
+    <div class="div_shadow">
+        盒子阴影
+    </div>
+</body>
+</html>
