@@ -23,7 +23,8 @@
         }
         /* 
             行内元素可设置四边padding生效，margin只有左右能生效，由于没有宽，margin不能设置为auto水平居中 
-            左右padding会影响布局，上下padding不会影响，但是会影响整体大小和背景（上padding可能无效，也许是浏览器问题）
+            由于没有宽高，padding不会影响布局，但是会影响页面呈现，比如设置了背景导致覆盖住前面所有元素
+            听说上padding会无效，但是本地没有测试出来，也许是浏览器的原因
         */
         strong{
             border: 2px rgb(156, 11, 132) solid;
