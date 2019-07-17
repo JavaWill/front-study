@@ -30,18 +30,19 @@
             width: 300px;
             height: 300px;
             border: 1px solid green;
-            border-spacing: 0;
+            /* border-spacing: 0; */
             border-collapse: collapse;
         }
         tr{
-            /* 没效果 */
-            border: 1px dotted pink;
+            /* 只有设置了border-collapse: collapse，tr边框才能生效 */
+            border-bottom: 1px double blue;
         }
         td{
-            border: 1px dashed black;
+            border-left: 1px dashed black;
+            border-right: 1px dashed black;
         }
         
-        /* 子元素margin-top和父元素margin-top合并（外边距塌陷），父元素需使用overflow: hidden;或者加padding/border解决此问题 */
+        /* 子元素margin-top和父元素margin-top合并（外边距塌陷），父元素需使用overflow: hidden或者加padding/border解决此问题 */
         .father{
             width: 200px;
             height: 200px;
@@ -64,6 +65,7 @@
             background:firebrick;
             margin-top: 30px;
         }
+
         /* 垂直顺序的元素也会有margin塌陷，这种情况只能尽量避免，没有解决途径 */
         .div_a{
             width: 100px;
@@ -77,12 +79,17 @@
             background:red;
             margin-top: 30px;
         }
+
         .all_width{
             border: 1px solid green;
             padding-left: 100px;
-            /* 不指定内容宽度，元素的最大宽度就是父元素的宽度，如果设置了width: 100%，加上padding，元素的真实宽度超出screen */
+            /* 
+                不指定内容宽度，子元素的最大宽度（content+padding+border+margin）就是父元素的内容宽度（content）
+                如果设置了width: 100%，内容宽度加上padding/border/margin，就导致元素宽度超过父元素的内容宽度
+            */
             /* width: 100%; */
         }
+
         .div_shadow{
             width: 100px;
             height: 100px;
