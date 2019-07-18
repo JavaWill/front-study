@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        /* 
+            设置盒子布局时，优先使用width > padding > margin
+            原因：width比较稳定，padding对于CSS2的content-box，每次修改都会影响整个元素的宽度，
+            margin会有塌陷问题，ie6以下版本还会出现双倍间距
+         */
         .div_border{
             /* 内容宽度 */
             width: 200px;

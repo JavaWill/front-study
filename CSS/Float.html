@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 脱离文档流，不占位置，影响整体布局 */
+        img{
+            float: left;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            float: right;
+            border: 1px solid salmon;
+        }
+        .fa{
+            padding: 10px;
+        }
+        /* 子盒子浮动不会压住父盒子的margin和padding（右浮就是右侧，如果宽度过大则向左下扩展） */
+        .son{
+            border-style: dashed;
+            border-width: 5px;
+        }
+        .d{
+            float: none;
+            margin-left: 300px;
+            height: 200px;
+            width: 400px;
+        }
+        /* 
+            浮动会影响元素特性（内联元素拥有宽高，块元素不换行，默认宽度从最大化调整为最小化）
+            为什么不直接display:inline-block;因为这个玩艺在ie6下有几个px的bug。
+         */
+        .d>span{
+            float: left;
+            border: 1px solid blueviolet;
+            width: 80px;
+            height: 60px;
+        }
+        .d>strong{
+            border: 1px solid blueviolet;
+        }
+        /* 排到了前面的内敛元素之前 */
+        .d>div{
+            float: left;
+        }
+        .d>p{
+            border: 1px solid green;
+        }
+        /* 垂直列表 */
+        ul>li{
+            float: left;
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+            list-style: none;
+        }
+        ul>li:nth-child(odd){
+            background: gold;
+        }
+    </style>
+</head>
+<body>
+    <img src="../img/3.jpg" width="200" height="300">
+    詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中，在2009年与2010年蝉联NBA常规赛最有价值球员（MVP）。2010年，詹姆斯转会至迈阿密热火队。2012年，詹姆斯得到NBA个人生涯的第3座常规赛MVP，第1个总冠军和总决赛MVP，并代表美国男篮获得了伦敦奥运会金牌，追平了迈克尔·乔丹在1992年所创的纪录。2013年，詹姆斯获得第4个常规赛MVP、第2个NBA总冠军和第2个总决赛MVP，实现两连冠。2014年，詹姆斯回归骑士。2016年，詹姆斯带领骑士逆转战胜卫冕冠军勇士获得队史首个总冠军和个人第3个总决赛MVP。2018年7月10日，詹姆斯正式与湖人签下4年1.53亿美元的合同。
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div class="fa">
+        <div class="son">
+        </div>
+    </div>
+    <div class="d">
+        <span>float span</span>
+        <strong>inline strong</strong>
+        <div>float div</div>
+        <p>block p</p>
+    </div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
