@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fa{
+            border: 1px solid red;
+            margin: 10px;
+            padding: 10px;
+        }
+        .fa>div{
+            height: 100px;
+            width: 100px;
+        }
+        .fa>div:first-child{
+            border: 1px solid skyblue;
+            /* 默认定位 */
+            position: static;
+        }
+        .fa>div:nth-child(2){
+            border: 1px solid salmon;
+            /* 相对定位不脱标 */
+            position: relative;
+            /* 相对自己做偏移 */
+            top: 10px;
+            left: 20px;
+        }
+        .fa>div:nth-child(3){
+            border: 1px solid darkgoldenrod;
+            /* 绝对定位，脱离文档 */
+            position: absolute;
+            /* 
+                父亲没设置定位，则将整个页面左上角（body的margin外）作为偏移参考点
+                如果有定位：relative/absolute，则以父亲border左上角为参考点
+                工程上一般用“子绝父相”的方式
+            */
+            top: 100px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="fa">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>

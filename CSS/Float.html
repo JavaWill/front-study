@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        /* 脱离文档流，不占位置，影响整体布局 */
+        /* 浮动：脱离文档流，不占位置，影响整体布局 */
         img{
             float: left;
         }
@@ -24,15 +24,18 @@
             border-style: dashed;
             border-width: 5px;
         }
+        /* 浮动子盒子不会撑开父盒子 */
         .d{
             float: none;
             margin-left: 300px;
-            height: 200px;
             width: 400px;
+            height: auto;
+            /* 设置此属性，可清除浮动效果，子元素撑开父元素 */
+            /* overflow: hidden; */
         }
         /* 
             浮动会影响元素特性（内联元素拥有宽高，块元素不换行，默认宽度从最大化调整为最小化）
-            为什么不直接display:inline-block;因为这个玩艺在ie6下有几个px的bug。
+            为什么不直接display:inline-block;因为这个玩意在ie6下有几个px的bug。
          */
         .d>span{
             float: left;
@@ -43,12 +46,24 @@
         .d>strong{
             border: 1px solid blueviolet;
         }
-        /* 排到了前面的内敛元素之前 */
+        /* 排到了前面的内联元素之前 */
         .d>div{
             float: left;
         }
         .d>p{
             border: 1px solid green;
+        }
+        ul{
+            /* 清除左右浮动 */
+            clear: both;
+        }
+         /* 使用伪元素清除浮动 */
+        .d::after{
+            content: '11'; /* 内容尽量不要为空 */
+            display: block; /* 伪元素默认为行内元素 */
+            clear: both;
+            height: 0;
+            visibility: hidden;
         }
         /* 垂直列表 */
         ul>li{
@@ -61,6 +76,15 @@
         ul>li:nth-child(odd){
             background: gold;
         }
+        /* 
+            清楚浮动的方法：
+            1，父元素设置高度（不建议）
+            2，clear:both
+            3，overflow:hidden
+            4，使用after伪元素
+            5，双伪元素
+            6，zoom
+         */
     </style>
 </head>
 <body>
