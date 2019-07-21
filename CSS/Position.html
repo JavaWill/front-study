@@ -10,6 +10,7 @@
             border: 1px solid red;
             margin: 10px;
             padding: 10px;
+            position: relative;
         }
         .fa>div{
             height: 100px;
@@ -17,7 +18,7 @@
         }
         .fa>div:first-child{
             border: 1px solid skyblue;
-            /* 默认定位 */
+            /* 默认静态定位 */
             position: static;
         }
         .fa>div:nth-child(2){
@@ -40,10 +41,88 @@
             top: 100px;
             left: 0;
         }
+        .c{
+            border: 15px solid red;
+            margin-top: 10px;
+            height: 100px;
+            width: 200px;
+            position: relative;
+        }
+        .c>div:first-child{
+            border: 20px solid darkgoldenrod;
+            /* 绝对定位设置margin水平居中无效 */
+            /* margin: 0 auto; */
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            left: 50%;
+            margin-left: -45px;
+            top: 50%;
+            margin-top: -45px;
+        }
+        .fix{
+            border: 20px solid salmon;
+            height: 100px;
+            width: 200px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .fix>span:first-child{
+            border: 5px solid darkgoldenrod;
+            /* 固定定位以页面左上角为参考点，脱标，ie6低版本不支持 */
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            left: 20px;
+        }
+        .z{
+            position: relative;
+        }
+        /* 
+            z-index默认0，值越大元素越居上
+            取值一样，后来居上
+            没有单位，可以为0 正数 负数
+            只有定位元素才有此参数，浮动没有
+         */
+        .z>:first-child{
+            width: 100px;
+            height: 100px;
+            background: firebrick;
+            position: absolute;
+            z-index: 1;
+            left: 10px;
+        }
+        .z>:nth-child(2){
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            z-index: 2;
+            left: 20px;
+        }
+        .z>:nth-child(3){
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            z-index: 2;
+            left: 30px;
+        }
     </style>
 </head>
 <body>
     <div class="fa">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="c">
+        <div></div>
+    </div>
+    <div class="fix">
+        <span></span>
+    </div>
+    <div class="z">
         <div></div>
         <div></div>
         <div></div>
