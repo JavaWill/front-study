@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .h{
+            border: 1px solid red;
+        }
+        .h>div:nth-child(1){
+            width: 200px;
+            height: 100px;
+            /* 元素结构还在，但是不占位置 */
+            display: none;
+        }
+        .h>div:nth-child(2){
+            width: 200px;
+            height: 100px;
+            /* 元素结构仍在，也占位置 */
+            visibility: hidden;
+        }
+        .h:hover>div:nth-child(1), .h:hover>div:nth-child(2){
+            display: block;
+            visibility: visible;
+        }
+        .h>div:nth-child(3){
+            border: 1px solid green;
+            width: 100px;
+            height: 50px;
+            /* 默认为visible显示、scroll滚动条、hidden隐藏、 */
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div class="h">
+        <div>display: none</div>
+        <div>visibility: hidden</div>
+        <div>这个属性定义溢出元素内容区的内容会如何处理。如果值为 scroll，不论是否需要，用户代理都会提供一种滚动机制。因此，有可能即使元素框中可以放下所有内容也会出现滚动条。默认值是 visible。</div>
+    </div>
+</body>
+</html>
