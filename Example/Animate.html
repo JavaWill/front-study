@@ -20,43 +20,80 @@
 </head>
 <body>
     <div class="box" id="box">
+        Hello
     </div>
     <script>
         var box = document.getElementById("box");
 
-        animate(box, {height: 300, width: 300, opacity: 0.3, left: 100, top: 50}, 1000, function(){
-            animate(box, {height: 50, width: 60, opacity: 0.7, left: 10, top: 10}, 2000);
-        });
+        // animateBox();
+        function animateBox(){
+            animate(box, {height: 300, width: 300, opacity: 0.3, left: 100, top: 50, fontSize: 120}, {
+                callBack: function(){
+                    animate(box, {height: 50, width: 60, opacity: 0.7, left: 10, top: 10, fontSize: 10}, {
+                        time: 4,
+                        callBack: function(){
+                            animate(box, {height: 300, width: 300, left: 100}, {model: "speedUp"});
+                        }
+                    });
+                },
+                model: "slowDown"
+            });
+        }
 
-        function animate(ele, targetJson, time, callBack){
-            var allTime = time ? time : 1000;
+        function animate(ele, targetJson, {time=1, callBack, model="normal"}){
+            if(ele.timer){
+                clearInterval(ele.timer);
+                ele.timer = null;
+            }
+
+            var allTime = time * 1000;
             var stepTime = 10; // 每一步的间隔，值为1、2、3时，速度明显变慢，总时间超出预期，why？
             var step = allTime / stepTime; // 根据时间确定步数
             var stepDistanceObj = {}; 
             for(var key in targetJson){ // 计算步长，各属性值拥有各自的速度，尽量保证步数走完，每个属性值达到预期
                 stepDistanceObj[key] = (targetJson[key] - getCssProperty(ele, key)) / step;
             }
-            console.log("speed: ", stepDistanceObj);
-            
+            if(model == "normal"){
+                console.log(`allTime: ${allTime}, speed: `, stepDistanceObj);
+            }
+
             var startTime = new Date();
             ele.timer = setInterval(() => {
                 for(var key in targetJson){
                     var prop = parseFloat(ele.style[key]) || getCssProperty(ele, key);
-                    var nextProp = prop + stepDistanceObj[key];
+                    var speed = stepDistanceObj[key]; // 默认匀速
+                    if(model == "slowDown"){ // 降速，无法控制时间
+                        speed = (targetJson[key] - prop) / 100; 
+                        if(key != "opacity"){
+                            speed = speed < 0 ? Math.floor(speed) : Math.ceil(speed);
+                        }
+                    } else if(model == "speedUp"){ // 升速，无法控制时间
+                        var upSpeed = ele.upSpeed ? ele.upSpeed : 1;
+                        upSpeed += 1;
+                        ele.upSpeed = upSpeed;
+                        speed = upSpeed;
+                    }
+                    var nextProp = prop + speed;
+                    
                     if(key == "opacity"){
                         ele.style[key] = nextProp;
                     }
-                    if(key == "width" || key == "height"){
+                    if(key == "width" || key == "height" || key == "fontSize"){
                         ele.style[key] = nextProp + "px";
                     }
                     if(key == "left" || key == "top"){
-                        if(ele.style.position != "relative"){
+                        var position = ele.style.position || getCssProperty(ele, "position");
+                        if(position != "relative" && position != "absolute"){
                             ele.style.position = "relative";
                         }
                         ele.style[key] = nextProp + "px";
                     }
-                    // 边界条件，当前属性值不足以再走一步
-                    if(Math.abs(ele.style[key] - targetJson[key]) < Math.abs(stepDistanceObj[key])){
+
+                    var minDis = Math.abs(nextProp - targetJson[key]);
+                    // 边界条件，匀速状态下当前属性值不足以再走一步，非匀速状态下精度为0.1或1
+                    if((model == "normal" && minDis < Math.abs(stepDistanceObj[key]))
+                        || (model != "normal" && key == "opacity" && minDis < 0.1) 
+                        || (model != "normal" && key != "opacity" && minDis <= 1)){
                         clearInterval(ele.timer);
                         ele.timer = null;
                         // 属性值误差清除
@@ -73,16 +110,123 @@
                         }
                         return;
                     }
-                    
                 }
             }, stepTime);
         }
 
         function getCssProperty(el, propertyName){
+            var pn = camel2CrossLine(propertyName);
+            var p;
             if(window.getComputedStyle){
-                return parseFloat(window.getComputedStyle(el).getPropertyValue(propertyName));
+                p = window.getComputedStyle(el).getPropertyValue(pn);
             } else {
-                return parseFloat(el.currentStyle[propertyName]);
+                p = el.currentStyle[pn];
+            }
+            if(isNaN(parseFloat(p))){
+                return p;
+            } else {
+                return parseFloat(p);
+            }
+        }
+
+        function camel2CrossLine(camel){
+            var arr = camel.split("");
+            for(var i in arr){
+                if(arr[i].charCodeAt(0) >= 65 && arr[i].charCodeAt(0) <= 90){
+                    arr[i] = "-" + arr[i].toLowerCase();
+                }
+            }
+            return arr.join("");
+        }
+    </script>
+    <style>
+        .fa{
+            border: 1px solid red;
+            padding: 10px;
+            width: 300px;
+            margin-top: 30px;
+            position: relative;
+            height: 23px;
+        }
+        .fa>div{
+            width: 36px;
+            height: 24px;
+            position: absolute;
+        }
+        #back{
+            background-color:greenyellow;
+            z-index: -1;
+            border-radius: 10%;
+        }
+        .fa>div:nth-child(3){
+            left: 50px;
+        }
+        .fa>div:nth-child(4){
+            left: 95px;;
+        }
+        .fa>div:nth-child(5){
+            left: 140px;
+        }
+    </style>
+    <div class="fa">
+        <div id="back"></div>
+        <div>南京</div>
+        <div>上海</div>
+        <div>武汉</div>
+        <div>深圳</div>
+    </div>
+    <script>
+        var child = document.querySelectorAll(".fa>div");
+        var back = child[0];
+        var currentLeft = child[1].offsetLeft;
+        for(var i = 1; i < child.length; i++){
+            child[i].onmouseover = function(){
+                var left = this.offsetLeft;
+                animate(back, {left: left}, {time: 0.3});
+            }
+            child[i].onmouseout = function(){
+                animate(back, {left: currentLeft}, {time: 0.1});
+            }
+            child[i].onclick = function(){
+                currentLeft = this.offsetLeft;
+            }
+        }
+    </script>
+    <style>
+        ul>li{
+            float: left;
+            width: 50px;
+            height: 100px;
+            background: red;
+            list-style: none;
+        }
+        li:nth-child(1){
+            background: forestgreen;
+        }
+        li:nth-child(2){
+            background: rebeccapurple;
+        }
+        li:nth-child(3){
+            background: gray;
+        }
+        li:nth-child(4){
+            background: teal;
+        }
+    </style>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        var arr = Array.from(document.querySelectorAll("li"));
+        for(var i in arr){
+            arr[i].onmouseover = function(){
+                for(var j in arr){
+                    animate(arr[j], {width: 20}, {time: 0.3});
+                }
+                animate(this, {width: 140}, {time: 0.1});
             }
         }
     </script>
