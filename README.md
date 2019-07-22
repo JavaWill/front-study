@@ -8,6 +8,7 @@
 |BoxModel|盒子模型
 |CSS3|CSS3新特性
 |Float|浮动
+|FontIcon|字体图标
 |Navigation|导航栏
 |Outline|轮廓
 |Position|定位
@@ -15,6 +16,7 @@
 |ShowHide|元素显示和隐藏
 |Sprite|CSS精灵
 |StylePriority|样式优先级
+|TwoD|2D
 |WordBreak|单词换行
 ## Example
 |xxx.html|内容

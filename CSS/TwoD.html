@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.test{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        div.test:hover{
+            transition-duration: 2s; 
+            transform: translate(100px, 100px) scale(2, 2) rotate(15deg);
+        }
+        p{
+            background: aqua;
+            text-align: center; 
+            height: 50px;
+            width: 100px;
+            left: 50%;
+            position: relative;
+            /* 水平居中，百分比参考的当前元素的宽度 */
+            transform: translate(-50%);
+        }
+        div.pk{
+            position: relative;
+            left: 500px;
+        }
+        div.pk>img{
+            position: absolute;
+            width: 150px;
+            height: 300px;
+            transform-origin: top left;
+            transition: all 1s;
+        }
+        div.pk:hover>img:nth-child(1){
+            transform: rotate(40deg);
+        }
+        div.pk:hover>img:nth-child(2){
+            transform: rotate(80deg);
+        }
+        div.pk:hover>img:nth-child(3){
+            transform: rotate(120deg);
+        }
+        div.pk:hover>img:nth-child(4){
+            transform: rotate(160deg);
+        }
+        div.pk:hover>img:nth-child(5){
+            transform: rotate(200deg);
+        }
+        a{
+            display: inline-block;
+            font-size: 50px;
+            transition: all 1s;
+        }
+        a:hover{
+            transform: skew(30deg, -30deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="test"></div>
+    <p>this is a p</p>
+    <div class="pk">
+        <img src="../img/6.jpg">
+        <img src="../img/6.jpg">
+        <img src="../img/6.jpg">
+        <img src="../img/6.jpg">
+        <img src="../img/6.jpg">
+    </div>
+    <a>RNG牛逼</a>
+</body>
+</html>
