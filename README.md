@@ -13,6 +13,7 @@
 |Position|定位
 |Selector|选择器
 |ShowHide|元素显示和隐藏
+|Sprite|CSS精灵
 |StylePriority|样式优先级
 |WordBreak|单词换行
 ## Example
