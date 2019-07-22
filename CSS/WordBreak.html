@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid salmon;
+            width: 100px;
+            height: 100px;
+        }
+        div:nth-child(1){
+            /* 使用默认的断行规则。 */
+            word-break: normal;
+        }
+        div:nth-child(2){
+            /* 对于non-CJK (CJK 指中文/日文/韩文) 文本，可在任意字符间断行 */
+            word-break: break-all;
+        }
+        div:nth-child(3){
+            /* CJK 文本不断行。 Non-CJK 文本表现同 normal。 */
+            word-break: keep-all;
+        }
+        div:nth-child(4){
+            /* suppresses line breaks */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div>What is - your name?你叫什么名字？</div>
+    <div>What is - your name?你叫什么名字？</div>
+    <div>What is - your name?你叫什么名字？</div>
+    <div>人生一知己，足以慰风尘</div>
+</body>
+</html>

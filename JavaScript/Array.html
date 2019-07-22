@@ -64,6 +64,10 @@
         console.log(arr); // ["wmj_1", "wmj_0"]
         console.log(arr.reduce(function(prev, value){return prev + value},"f_")); // f_wmj_1wmj_0 缩减
         console.log(arr.reduceRight((prev, value) => prev + value, "f_")); // f_wmj_0wmj_1 从右往左
+        /*
+            new Array(3)和Array.of(3)是不同的效果
+            Array.from()将类数组对象或可迭代对象转为数组，浅拷贝
+        */
         arr = Array.of("wmj").concat("wmc", Array.from({0: "lp", 1: "tzy", length: 2})).copyWithin(0, 2, 4);
         console.log(arr); // ["lp", "tzy", "lp", "tzy"]
         /*

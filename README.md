@@ -2,6 +2,7 @@
 ## CSS
 |xxx.html|内容
 |:-|:-:|
+|Align|对齐
 |Background|背景
 |BlockAndInline|块元素和内联元素
 |BoxModel|盒子模型
@@ -13,6 +14,7 @@
 |Selector|选择器
 |ShowHide|元素显示和隐藏
 |StylePriority|样式优先级
+|WordBreak|单词换行
 ## Example
 |xxx.html|内容
 |:-|:-:|
