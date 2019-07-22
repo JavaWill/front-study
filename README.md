@@ -16,6 +16,7 @@
 |ShowHide|元素显示和隐藏
 |Sprite|CSS精灵
 |StylePriority|样式优先级
+|ThreeD|3D
 |TwoD|2D
 |WordBreak|单词换行
 ## Example

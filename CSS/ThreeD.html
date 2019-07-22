@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 
+            x轴左负右正
+            y轴上负下正
+            z轴里负外正
+         */
+        body{
+            /* 透视，写在父元素里面，Each 3D element with z>0 becomes larger; each 3D-element with z<0 becomes smaller */
+            perspective: 800px;
+        }
+        div{
+            margin-top: 30px;
+            width: 100px;
+            height: 100px;
+            margin-left: 200px;
+            transition: all 2s;
+        }
+        div:nth-child(1){
+            background: red;
+        }
+        div:nth-child(1):hover{
+            /* 绕着Y轴转180度 */
+            transform: rotateY(180deg) translateX(50px);
+        }
+        div:nth-child(2){
+            background: url("../img/3.jpg") no-repeat;
+            background-size: contain;
+        }
+        div:nth-child(2):hover{
+            /* z轴好像是斜着的，应该是透视的原因 */
+            transform: rotateX(180deg) translateZ(50px);
+        }
+    </style>
+</head>
+<body>
+    <div>Hello</div>
+    <div></div>
+</body>
+</html>
