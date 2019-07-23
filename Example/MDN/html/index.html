@@ -44,7 +44,7 @@
             line-height: 88px;
             color: black;
         }
-        a:hover{
+        .nav-main-item>a:hover, .nav-login>a:hover{
             background: #eeeeee;
         }
         .submenu{
@@ -75,15 +75,26 @@
             display: block;
             animation: showSub 0.5s linear;
         }
-        .icon-github{
-            margin-left: 5px;
-            vertical-align: text-bottom;
+        .toolbox{
+            flex: 1;
         }
-        .toolbox>ul{
+        .toolbox li{
+            display: inline-block;
+        }
+        .toolbox ul{
             display: flex;
         }
         .nav-login{
-            flex: auto;
+            flex: 1;
+            position: relative;
+        }
+        .nav-login>a{
+            position: absolute;
+            right: 0px;
+        }
+        .icon-github{
+            margin-left: 5px;
+            vertical-align: text-bottom;
         }
         .nav-search>a{
             background: black;
