@@ -11,7 +11,7 @@
             font-size: 50px;
             font-family: fantasy;
         }
-        p:first-child{
+        p:nth-child(1){
             /* 水平位置 垂直位置 模糊距离 阴影颜色 */
             text-shadow: 1px 1px 1px #000;
             border: 5px solid green;
@@ -23,7 +23,7 @@
              */
             box-sizing: content-box;
         }
-        p:last-child{
+        p:nth-child(3){
             text-shadow: -1px -1px 1px #000;
         }
         p:nth-child(2){
@@ -38,11 +38,75 @@
             resize: both;
             overflow: auto;
         }
+        section{
+            /* 弹性布局 */
+            display: flex;
+            /* 反转横向排列 */
+            flex-direction: row-reverse;
+            width: 600px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        section>div:nth-child(1){
+            background: goldenrod;
+            /* flex: 2; */
+            /* 
+                已设置宽度，则父盒子先把此宽度去除，再用剩下的宽度做比例划分 
+                这里的宽度并不是一定的，在缩小浏览器窗口至很小的时候，会压缩到宽度以下
+            */
+            width: 50px;
+            /* 定义排列顺序，数值小的排在前面，默认0 */
+            order: 1;
+        }
+        section>div:nth-child(2){
+            background: aqua;
+            /* flex设置的是内容宽/高比例 */
+            flex: 1;
+            /* margin: 0 30px; */
+            /* padding: 0 30px; */
+            border: 5px solid salmon;
+            border-left-width: 100px;
+        }
+        section>div:nth-child(3){
+            background: cadetblue;
+            flex: 1;
+        }
+        nav{
+            display: flex;
+            width: 600px;
+            height: 300px;
+            border: 1px solid rebeccapurple;
+            margin: 10px auto;
+            flex-direction: column-reverse;
+            /* 设置沿着弹性容器的主轴线（main axis）的对齐方式 */
+            justify-content: space-between;
+            /* 设置或检索弹性盒子元素在侧轴（cross axis）方向上的对齐方式 */
+            align-items: center;
+            /* 子元素换行方式，默认nowrap */
+            flex-wrap: wrap-reverse;
+            /* 设置各个行的对齐，和align-items有冲突 */
+            /* align-content: space-between; */
+        }
+        nav>div{
+            width: 100px;
+            height: 100px;
+            border: 5px solid seagreen;
+        }
     </style>
 </head>
 <body>
     <p>文字凸起</p>
     <p>文字阴影</p>
     <p>文字凹下</p>
+    <section>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </section>
+    <nav>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </nav>
 </body>
 </html>

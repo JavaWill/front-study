@@ -47,8 +47,21 @@
             border-bottom: 1px solid #fecc5b;
             padding-left: 10px;
         }
+        @keyframes showMenuList {
+            0%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 0.5;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
         .tn-title:hover .tn-topmenulist{
+            /* display不是动画属性 */
             display: block;
+            animation: showMenuList 1s linear;
         }
     </style>
 </head>

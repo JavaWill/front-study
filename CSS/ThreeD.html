@@ -12,8 +12,14 @@
             z轴里负外正
          */
         body{
-            /* 透视，写在父元素里面，Each 3D element with z>0 becomes larger; each 3D-element with z<0 becomes smaller */
-            perspective: 800px;
+            /* 
+                指定观察者距离z=0平面的距离，为元素及其内容应用透视变换。当值为0或负值时，无透视变换 
+            */
+            perspective: 200px;
+            /* 
+                由于给body设置了视距，默认的参考点为body中心
+             */
+            perspective-origin: 250px 50%;
         }
         div{
             margin-top: 30px;
@@ -31,16 +37,61 @@
         }
         div:nth-child(2){
             background: url("../img/3.jpg") no-repeat;
-            background-size: contain;
+            background-size: cover;
         }
         div:nth-child(2):hover{
-            /* z轴好像是斜着的，应该是透视的原因 */
-            transform: rotateX(180deg) translateZ(50px);
+            transform: rotateX(180deg);
+            /* 隐藏背面 */
+            backface-visibility: hidden;
         }
+        /* 定义动画 */
+        @keyframes run {
+            from{
+                transform: translate(50px);
+            }
+            to{
+                transform: rotate(90deg);
+            }
+        }
+        div:nth-child(3){
+            background: red;
+        }
+        div:nth-child(3):hover{
+            animation: run 2s ease 0s infinite alternate;
+        }
+        @keyframes cycle {
+            0%{
+                transform: translateX(50%) translateY(50%);
+                opacity: 0.2;
+            }
+            25%{
+                transform: rotateX(90deg);
+                opacity: 0.4;
+            }
+            50%{
+                transform: scaleX(2) scaleY(2);
+                opacity: 0.5;
+            }
+            75%{
+                transform: translate(30px);
+                opacity: 0.8;
+            }
+            100%{
+                transform: skew(60deg);
+                opacity: 1;
+            }
+        }
+        div:nth-child(4){
+            background: teal;
+            animation: cycle 6s ease 0s infinite alternate;
+        }
+
     </style>
 </head>
 <body>
     <div>Hello</div>
     <div></div>
+    <div></div>
+    <div>Hello</div>
 </body>
 </html>

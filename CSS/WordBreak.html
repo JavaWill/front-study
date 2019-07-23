@@ -24,7 +24,15 @@
             word-break: keep-all;
         }
         div:nth-child(4){
-            /* suppresses line breaks */
+            /* 
+                如何处理HTML代码中的空白
+                normal，默认值，合并空白和回车符为一个空白，在空白处或<br>处换行（内联填充块元素，追求最小，避免滚动条）
+                nowrap，合并空白，空白处不换行，只有<br>处换行
+                pre，保留所有空白，仅在回车符或者<br>处换行
+                pre-wrap，保留空白，回车符、<br>、空白处换行
+                pre-line，合并空白，回车符、<br>、空白处换行
+                break-spaces，
+            */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
