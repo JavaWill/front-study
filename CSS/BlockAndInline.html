@@ -73,6 +73,11 @@
         /* 5，行内元素转行内块元素 */
         a[inlineBlock]{
             display: inline-block;
+            height: auto;
+            /* 内联元素的line-height不能撑开自己，只能撑开父元素，除非设置为inline-block或block */
+            line-height: 80px;
+            background: bisque;
+            border: 1px solid seagreen;
         }
         /* 6，行内元素转块元素 */
         a[block]{

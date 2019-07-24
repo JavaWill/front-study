@@ -25,7 +25,7 @@
             border: 1px solid salmon;
             /* 相对定位不脱标 */
             position: relative;
-            /* 相对自己做偏移 */
+            /* 相对自己做偏移，参考点为整个元素的左上角 */
             top: 10px;
             left: 20px;
         }
@@ -126,6 +126,18 @@
         <div></div>
         <div></div>
         <div></div>
+    </div>
+    <div style="width:100px;height:100px;position:relative;border:1px solid red;top:150px;">
+        <div style="position:absolute;border:1px solid skyblue;margin:5px;">
+            子绝对布局元素的宽度会尽量不超过父定位元素的宽度（属于自适应），但也是有可能超出的，比如文本设置不换行
+        </div>
+    </div>
+    <div style="width:100px;height:100px;position:relative;border:1px solid red;top:300px;">
+        <div style="width:50px;position:absolute;border:1px solid red;top:10px;left:10px;bottom:10px;">
+            <div style="width:10px;position:absolute;border:1px solid red;top:20px;left:10px;bottom:20px;">
+
+            </div>
+        </div>
     </div>
 </body>
 </html>

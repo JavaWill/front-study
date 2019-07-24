@@ -1,4 +1,13 @@
-ul{
+body, ul{
     margin: 0;
     padding: 0;
+}
+a, button{
+    cursor: pointer;
+}
+svg{
+    fill: currentColor;
+}
+h1{
+    font-family: x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,serif;
 }
