@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .main{
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .content{
+            position: absolute;
+            width: 400px;
+            /* 取消inline中间，由于代码换行导致的空格 */
+            font-size: 0;
+        }
+        img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .number{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+        .index{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="content" id="content">
+            <img src="../img/1.jpg" alt="">
+            <img src="../img/2.jpg" alt="">
+            <img src="../img/3.jpg" alt="">
+            <img src="../img/1.jpg" alt="">
+        </div>
+        <div class="number">
+            <div class="index" index="0"></div>
+            <div class="index" index="1"></div>
+            <div class="index" index="2"></div>
+        </div>
+    </div>
+    <script>
+        var content =document.getElementById("content");
+        var imgIndex = 0;
+        colorImgIndex("blue");
+        var apTimer = setInterval(autoPlay, 2000); // 动画总耗时为 100 / 1 * 10 = 1000ms，这里的定时必须必1000ms大，否则会有异常
+        content.onmouseover = () => {
+            clearInterval(apTimer);
+            apTimer = null;
+        }
+        content.onmouseout = () => {
+            if(!apTimer){
+                apTimer = setInterval(autoPlay, 2000);
+            }
+        }
+        function autoPlay(){
+            animate(content, -100);
+            colorImgIndex("red");
+            imgIndex ++;
+            colorImgIndex("blue");
+        }
+        function colorImgIndex(color){
+            var index = imgIndex == 3 ? 0 : imgIndex;
+            document.querySelector(".index[index='" + index + "']").style.backgroundColor = color;
+        }
+        function animate(ele, left){
+            if(ele.timer){
+                return;
+            }
+            if(ele.offsetLeft <= -300){
+                ele.style.left = 0 + "px";
+                imgIndex = 0;
+            }
+            var nLeft = getLeft(ele) + left;
+            var step = left < 0 ? -1 : 1;
+            ele.timer = setInterval(()=>{
+                ele.style.left = getLeft(ele) + step + "px";
+                if(Math.abs(getLeft(ele)) == Math.abs(nLeft)){
+                    clearInterval(ele.timer);
+                    ele.timer = null;
+                }
+            }, 10);
+        }
+        function getLeft(ele){
+            var left = ele.style.left || "0px";
+            left = left.slice(0, left.indexOf("px"));
+            return parseFloat(left);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var a = {name: "a", age: "18"};
+
+        var b = {};
+        b.name = "b";
+        b.age = 19;
+
+        function P(name, age){
+            this.name = name;
+            this.age = age;
+        }
+        P.prototype.detail = {hobby: "basketball"};
+
+        var c = new P("c", 20);
+        console.log(c, c instanceof P, typeof c); // {name: "c", age: 20} true "object"
+
+        var c_1 = P("c_1", 20);
+        console.log(c_1); // undefined
+        console.log(name, window.age); // c_1 20
+
+        var c_2 = new P("c_2", 20); 
+        console.log(c.detail, c_2.detail, c.detail === c_2.detail); // {hobby: "basketball"} {hobby: "basketball"} true
+
+        function PC(name, age){
+            var obj = {};
+            obj.name = name;
+            obj.age = age;
+            return obj;
+        }
+        var d = PC("d", 21);
+        console.log(d, d instanceof PC, typeof d); // {name: "d", age: 21} false "object"
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

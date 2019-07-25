@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 定时器为异步代码，for循环为同步代码，先执行同步，再异步
+        // 由于i是函数作用域，所以输出3个3
+        // 解决办法：闭包/let
+        // for(var i = 0; i < 3; i ++){
+        //     setTimeout(() => {
+        //         console.log(i);
+        //     }, 0);
+        // }
+
+        // for(let i = 0; i < 3; i ++){
+        //     setTimeout(() => {
+        //         console.log(i);
+        //     }, 0);
+        // }
+        
+        for(var i = 0; i < 3; i ++){
+            (function(){
+                var j = i;
+                return setTimeout(() => { console.log(j); }, 0);
+            })();
+        }
+
+        /*
+            var 重复定义会覆盖、没有块级作用域、变量自动提升
+            let 重复定义会报错、具有块级作用域、不存在预解析
+            const 定义常量、不能重新赋值、对象可以修改属性值
+        */
+        const a = {a: "a"};
+        // a = "b"; // Assignment to constant variable.
+        a.a = "b";
+        console.log(a.a);
+        // let a; // Identifier 'a' has already been declared
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

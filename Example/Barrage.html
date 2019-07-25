@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .main{
+            position: relative;
+            width: 800px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px solid salmon;
+            overflow: hidden;
+        }
+        .window{
+            height: 350px;
+            background-color: royalblue;
+            opacity: 0.3;
+        }
+        .toolbar{
+            height: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main" id="main">
+        <div class="window"></div>
+        <div class="toolbar">
+            <input type="text" id="content">
+            <input type="button" value="发送" onclick="sendContent()">
+            <input type="button" value="隐藏" onclick="hide()">
+            <input type="button" value="显示" onclick="show()">
+            弹幕颜色:
+                <input type="radio" value="#0a5d2a" name="color"><input type="color" value="#0a5d2a" disabled>
+                <input type="radio" value="#9c0a34" name="color"><input type="color" value="#9c0a34" disabled>
+                <input type="radio" value="custom" name="color">自定义:<input type="color" id="customColor">
+        </div>
+    </div>
+    <script>
+        var main = document.getElementById("main");
+        function sendContent(){
+            var right = 0;
+            var top = Math.random() * 330;
+            var content = document.getElementById("content").value;
+            var selectColor = document.querySelector("input[name='color']:checked");
+            var color = selectColor == null || selectColor.value == "custom" ? document.getElementById("customColor").value : selectColor.value;
+            var barrage = document.createElement("div");
+            barrage.style.position = "absolute";
+            barrage.style.right = right + "px";
+            barrage.style.top = top + "px";
+            barrage.style.whiteSpace = "nowrap";
+            barrage.style.color = color;
+            barrage.innerText = content;
+            main.appendChild(barrage);
+            barrage.timer = setInterval(() => {
+                if(showFlag == 1){
+                    barrage.style.visibility = "visible";
+                } else {
+                    barrage.style.visibility = "hidden";
+                }
+                barrage.style.right = (right += 1) + "px";
+                if(barrage.offsetLeft <= -barrage.offsetWidth){
+                    clearInterval(barrage.timer);
+                    barrage.remove();
+                }
+            }, 20);
+        }
+        document.getElementById("content").onkeypress = function(){
+            sendContent();
+        }
+        var showFlag = 1;
+        function hide(){
+            showFlag = 0;
+        }
+        function show(){
+            showFlag = 1;
+        }
+    </script>
+</body>
+</html>

@@ -23,6 +23,7 @@
 |:-|:-:|
 |MDN|MDN首页
 |Animate|动画
+|Barrage|弹幕
 |Clock|模拟时钟
 |CycleRoll|循环滚动
 |Drag|模拟拖动
@@ -33,6 +34,7 @@
 |OpenDoor|开门动画
 |SqlAutoGen|动态生成sql
 |SwitchPic|图片切换
+|SwitchPicAuto|图片自动切换
 ## HTML
 |xxx.html|内容
 |:-|:-:|
@@ -46,6 +48,7 @@
 ## JavaScript
 |xxx.html|内容
 |:-|:-:|
+|ActionScope|作用域
 |Algorithm|算法
 |Animate|动画
 |Array|数组
@@ -67,7 +70,9 @@
 |LogicOper|逻辑运算符
 |Math|数学对象
 |Object|对象
+|OOP|面向对象
 |Operator|运算符
+|Proto|原型
 |String|字符串
 |Type|数据类型
 ## img

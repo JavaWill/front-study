@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var a_1 = {name: "a_1"};
+        console.log(a_1);
+        console.log(a_1 instanceof Object, a_1.__proto__ instanceof Object); // true false
+        console.log(a_1.__proto__ == a_1.constructor.prototype); // true
+        console.log(a_1.__proto__ == Object.getPrototypeOf(a_1)); // true
+        console.log(a_1.__proto__.__proto__); // null 原型链的最顶层
+        console.dir(a_1.constructor); // ƒ Object()
+        console.log(a_1.hasOwnProperty("name")); // true
+
+        function Person(name){
+            this.name = name;
+        }
+        var a_2 = new Person("a_2");
+        console.log(a_2);
+        console.log(a_2 instanceof Person, a_2 instanceof Object, Person instanceof Function); // true true true
+        console.dir(Person); // ƒ Person(name)
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
