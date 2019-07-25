@@ -6,22 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
+        // 普通对象
         var a_1 = {name: "a_1"};
         console.log(a_1);
         console.log(a_1 instanceof Object, a_1.__proto__ instanceof Object); // true false
+        console.log(typeof a_1, typeof a_1.__proto__); // object object
         console.log(a_1.__proto__ == a_1.constructor.prototype); // true
         console.log(a_1.__proto__ == Object.getPrototypeOf(a_1)); // true
         console.log(a_1.__proto__.__proto__); // null 原型链的最顶层
         console.dir(a_1.constructor); // ƒ Object()
         console.log(a_1.hasOwnProperty("name")); // true
 
+        // 函数对象
         function Person(name){
             this.name = name;
         }
+        Person.prototype.id = "p";
         var a_2 = new Person("a_2");
         console.log(a_2);
-        console.log(a_2 instanceof Person, a_2 instanceof Object, Person instanceof Function); // true true true
-        console.dir(Person); // ƒ Person(name)
+        console.dir(Person);
+        console.log(a_2.id); // p
+        console.log(a_2 instanceof Person, a_2 instanceof Object); // true true
+        console.log(Person instanceof Function, Person instanceof Object); // true true
+        console.log(a_2.constructor == Person.prototype.constructor); // true
+        console.log(Person.prototype.constructor == Person); // true
+        console.log(a_2.__proto__ == Person.prototype); // true
+
+        /*
+            1，所有对象都有__proto__属性，用于指向创建它的构造函数的原型对象
+            2，函数对象独有prototype，就是普通对象，有__proto__，即Object，也有constructor，指向函数本身
+            3，通过函数创建对象时，此对象的__proto__指向构造函数的prototype
+            4，函数对象只有一个，它的prototype也只有一个，而通过他来创建的所有对象，
+                他们的__proto__都指向函数对象的prototype，类似于JAVA中“访问类的静态成员”
+            5，
+        */
         
     </script>
 </head>
