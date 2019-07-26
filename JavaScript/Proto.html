@@ -6,31 +6,82 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        // 普通对象
-        var a_1 = {name: "a_1"};
-        console.log(a_1);
-        console.log(a_1 instanceof Object, a_1.__proto__ instanceof Object); // true false
-        console.log(typeof a_1, typeof a_1.__proto__); // object object
-        console.log(a_1.__proto__ == a_1.constructor.prototype); // true
-        console.log(a_1.__proto__ == Object.getPrototypeOf(a_1)); // true
-        console.log(a_1.__proto__.__proto__); // null 原型链的最顶层
-        console.dir(a_1.constructor); // ƒ Object()
-        console.log(a_1.hasOwnProperty("name")); // true
-
-        // 函数对象
+        /*
+            函数对象 
+            1，系统函数：Object, Array, Function, Number, String, Boolean, Math
+            2，自定义函数：Person
+        */
         function Person(name){
             this.name = name;
         }
-        Person.prototype.id = "p";
-        var a_2 = new Person("a_2");
-        console.log(a_2);
-        console.dir(Person);
-        console.log(a_2.id); // p
-        console.log(a_2 instanceof Person, a_2 instanceof Object); // true true
-        console.log(Person instanceof Function, Person instanceof Object); // true true
-        console.log(a_2.constructor == Person.prototype.constructor); // true
-        console.log(Person.prototype.constructor == Person); // true
-        console.log(a_2.__proto__ == Person.prototype); // true
+        // 函数对象也是一种对象，所以拥有自己的方法
+        console.dir(Object.is(NaN, NaN)); // true
+        // 所有函数对象都拥有prototype属性，即原型对象
+        console.log(Object.prototype == undefined, Person.prototype == undefined); // false false
+        // 只有Function的prototype是函数对象，其他的都是普通对象
+        console.log(typeof Object.prototype, typeof Function.prototype, typeof Person.prototype); // object function object
+        // 函数同时也是构造函数，使用new来调用
+        console.log(new Object(), new Person("wmj"));
+        // 原型对象自动获得constructor属性，指向prototype所在函数 var a = {}; a.a = a;
+        console.log(Function.prototype.constructor == Function, Object.prototype.constructor == Object); // true true
+        // 所有对象都有__proto__内置属性，指向创建它的构造函数的原型对象，由它构成原型链
+        console.log(new Object().__proto__ == Object.prototype, Object.__proto__ == Function.prototype); // true true
+        // 所有函数对象的__proto__都指向Function.prototype，包括Function自己
+        console.log(Person.__proto__ == Function.prototype, Function.__proto__ == Function.prototype); // true true
+        // Function的原型对象的__proto__指向Object的原型对象
+        console.log(Function.prototype.__proto__ == Object.prototype); // true
+        // Object的原型对象的__proto__指向null
+        console.log(Object.prototype.__proto__); // null
+        /*
+            From MDN:
+            The instanceof operator tests the presence of constructor.prototype in object's prototype chain.
+            （左）对象的原型链__proto__中存不存在（右）构造函数的原型prototype，__prototype__ == prototype
+        */
+        // Object.__proto__ == Function.prototype, Function.__proto__.__proto__ == Object.prototype
+        console.log(Object instanceof Function, Function instanceof Object); // true true
+        // Object.__proto__.__proto__ == Object.prototype, Function.__proto__ == Function.prototype
+        console.log(Object instanceof Object, Function instanceof Function); // true true
+
+        /*
+            prototype是在创建对象时，赋给其__proto__属性而使用的，对象通过__proto__构成原型链
+            __proto__是对象的内置属性，在访问对象属性时，会沿着__proto__逐级查找，直至找到第一个遇到的值，此乃继承
+            constructor是prototype对象的成员，它指向当前所在函数，随prototype赋予创建的对象，是为了标明此对象是通过哪个函数创建的
+
+            Function函数对象是由它自己构造而来的？，Function.__proto__ = Function.prototype，其他所有函数对象，都是通过它来构造
+            Object的prototype的__proto__为null，此为原型链的终点，其他所有对象的__proto__都有值
+            Function的prototype，typeof为function，其他函数对象的的prototype，typeof为object，虽然typeof不一样，
+                但他们的prototype都是通过Object函数对象创建的，Function.prototype.__proto__ === Object.prototype，
+                    综上，普通对象的原型链，person->Person->Object->null
+                          函数对象原型链，Person->Function->Object->null
+                          Function原型链，Function->Function->Object->null
+        */
+        var person = new Person();
+        console.log(person);
+        // 普通对象原型链
+        console.log(person.__proto__ === Person.prototype); // true
+        console.log(Person.prototype.__proto__ === Object.prototype); // true
+        console.log(Object.prototype.__proto__ === null); // true
+        // 函数对象原型链
+        console.log(Person.__proto__ === Function.prototype); // true
+        console.log(Function.prototype.__proto__ === Object.prototype); // true
+        console.log(Object.prototype.__proto__ === null); // true
+        // Function原型链
+        console.log(Function.__proto__ === Function.prototype); // true
+        console.log(Function.prototype.__proto__ === Object.prototype); // true
+        console.log(Object.prototype.__proto__ === null); // true
+
+        Person.prototype.id = "Person_id";
+        Function.prototype.id = "Function_id";
+        Object.prototype.id = "Object_id";
+
+        console.log(person.id); // Person_id
+        console.log(Person.id); // Function_id
+        console.log(Function.id); // Function_id
+
+        var obj = {};
+        console.log(obj instanceof Person); // false
+        obj.__proto__ = Person.prototype;
+        console.log(obj instanceof Person); // true
 
         /*
             1，所有对象都有__proto__属性，用于指向创建它的构造函数的原型对象
@@ -38,7 +89,7 @@
             3，通过函数创建对象时，此对象的__proto__指向构造函数的prototype
             4，函数对象只有一个，它的prototype也只有一个，而通过他来创建的所有对象，
                 他们的__proto__都指向函数对象的prototype，类似于JAVA中“访问类的静态成员”
-            5，
+            5，头都要炸了。。
         */
         
     </script>
