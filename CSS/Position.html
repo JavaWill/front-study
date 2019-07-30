@@ -35,7 +35,7 @@
             position: absolute;
             /* 
                 父亲没设置定位，则将整个页面左上角（body的margin外）作为偏移参考点
-                如果有定位：relative/absolute，则以父亲border左上角为参考点
+                如果有定位：relative/absolute，则以父亲content左上角为参考点
                 工程上一般用“子绝父相”的方式
             */
             top: 100px;
@@ -43,6 +43,7 @@
         }
         .c{
             border: 15px solid red;
+            border-top-width: 40px;
             margin-top: 10px;
             height: 100px;
             width: 200px;
@@ -50,8 +51,18 @@
         }
         .c>div:first-child{
             border: 20px solid darkgoldenrod;
-            /* 绝对定位设置margin水平居中无效 */
-            /* margin: 0 auto; */
+            /* 
+                绝对定位设置水平居中：
+                    width: 100px;
+                    margin: 0 auto;
+                    left: 0;
+                    right: 0;
+                垂直居中：
+                    height: 100px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+            */
             position: absolute;
             height: 50px;
             width: 50px;
@@ -134,9 +145,15 @@
     </div>
     <div style="width:100px;height:100px;position:relative;border:1px solid red;top:300px;">
         <div style="width:50px;position:absolute;border:1px solid red;top:10px;left:10px;bottom:10px;">
-            <div style="width:10px;position:absolute;border:1px solid red;top:20px;left:10px;bottom:20px;">
-
+            <div style="position:absolute;border:1px solid red;top:20px;left:10px;bottom:20px;white-space: nowrap;">
+                使用top和bottom控制高度
             </div>
+        </div>
+    </div>
+    <div style="position:relative;top: 311px;;width:200px;height:100px;border:1px solid red;vertical-align:middle;">
+        <i style="display:inline-block;width:0;height:100%;vertical-align:middle;"></i>
+        <div style="display:inline-block;vertical-align:middle;width: 150px;">
+            使用vertical-align:middle;实现垂直居中
         </div>
     </div>
 </body>

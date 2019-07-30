@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
+        /*
+        对象：无序属性的集合
+        */
         var a = {name: "a", age: "18"};
 
         var b = {};
@@ -15,19 +18,30 @@
         function P(name, age){
             this.name = name;
             this.age = age;
+            this.show_1 = function(){
+                return `${name}-${age}`;
+            }
+            return "P";
         }
-        P.prototype.detail = {hobby: "basketball"};
+        P.prototype.show_2 = function(){
+            return `${this.name}-${this.age}`;
+        }
 
+        // 调用构造函数
         var c = new P("c", 20);
-        console.log(c, c instanceof P, typeof c); // {name: "c", age: 20} true "object"
-
+        console.log(c instanceof P, typeof c); // true "object"
+        
+        // 直接调用函数
         var c_1 = P("c_1", 20);
-        console.log(c_1); // undefined
+        console.log(c_1); // P
         console.log(name, window.age); // c_1 20
 
-        var c_2 = new P("c_2", 20); 
-        console.log(c.detail, c_2.detail, c.detail === c_2.detail); // {hobby: "basketball"} {hobby: "basketball"} true
+        // 非原型的属性对象不是同一对象
+        var c_2 = new P("c_2", 20);
+        console.log(c.show_1 == c_2.show_1, c.show_2 == c_2.show_2); // false true
+        console.log(c.show_1(), c.show_2()); // c-20 c-20
 
+        // 使用工厂函数创建对象
         function PC(name, age){
             var obj = {};
             obj.name = name;
@@ -35,7 +49,13 @@
             return obj;
         }
         var d = PC("d", 21);
-        console.log(d, d instanceof PC, typeof d); // {name: "d", age: 21} false "object"
+        console.log(d, d instanceof PC); // {name: "d", age: 21} false
+
+        // new操作的原理
+        var d_1 = {};
+        P.call(d_1, "d_1", 30);
+        d_1.__proto__ = P.prototype;
+        console.log(d_1, d_1 instanceof P); // {name: "d_1", age: 30, show_1: ƒ} true
 
     </script>
 </head>
