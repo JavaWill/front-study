@@ -74,6 +74,7 @@
 |Operator|运算符
 |Proto|原型
 |String|字符串
+|This|this关键字
 |Type|数据类型
 ## img
 > 统一放置图片

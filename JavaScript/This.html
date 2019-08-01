@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            border: 1px solid salmon;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">哈哈哈</div>
+    <script>
+        /*
+        1，对象.方法() this指向该对象
+        2，函数直接调用 this指向window对象
+        3，事件处理函数中 this指向事件源
+        4，定时器回调函数中 this指向window
+        5，函数作为数组元素 通过索引的方式调用 this指向该数组
+        6，箭头函数中 this指向外层函数作用域的this
+        7，使用call或者apply方法改变this指向 前者传入对象+可变参数，后者传入对象+数组参数
+        */
+        var person = {
+            name1: "wmj",
+            show_1: function(){
+                console.log(this.name1); // wmj
+            },
+            show_2: ()=>{
+                console.log(this.name1); // undefined
+            }
+        };
+        person.show_1();
+        person.show_2();
+
+        var box1 = document.getElementsByClassName("box1")[0];
+        box1.onclick = function(){
+            var fz = 1;
+            var _el = this; // box1
+            setInterval(function(){
+                // console.log(this); // window
+                _el.style.fontSize = (fz += 2) + "px";
+            }, 500);
+            setTimeout(()=>{
+                console.log("to1", this); // box1
+            }, 500);
+            setTimeout(function(){
+                (()=>{
+                    console.log("to2", this); // Window
+                })();
+            }, 500);
+        }
+
+        function fn(){
+            console.log(this);
+        }
+        var arr = [fn, 1, 2, 3];
+        arr[0]();
+
+        var numArr = [2, 3, 1, 4];
+        console.log(Math.min(numArr)); // NaN
+        console.log(Math.min(...numArr)); // 1
+        console.log(Math.min.call(window, numArr)); // NaN
+        console.log(Math.min.apply(window, numArr)); // 1
+    </script>
+</body>
+</html>
