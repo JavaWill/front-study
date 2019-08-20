@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1，预解析：
+                全局作用域（script）和局部作用域（函数体）中，
+                var声明被提到开头位置且默认值为undefined，function声明提到var之后
+                --->
+                function b(){}
+                var b = 10;
+                --->
+                var b = undefined;
+                function b(){};
+                b = 10;
+                --->
+            2，执行：
+                按照代码行顺序执行
+        */
+        console.log(a); // undefined
+        var a = 20;
+        b();
+        var b = 20;
+        function b(){
+            console.log(a); // undefined
+            var a = 10;
+        }
+        console.log(a); // 20
+        console.log(b); // 20
+    </script>
+</body>
+</html>

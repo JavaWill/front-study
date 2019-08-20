@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .girl{
+            width: 79px;
+            height: 108px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background: url(../img/girl.png);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var direction = {
+            "bottom": 1,
+            "left": 2,
+            "right": 3,
+            "top": 4,
+            "left-bottom": 5,
+            "right-bottom": 6,
+            "left-top": 7,
+            "right-top": 8
+        };
+        function Girl(direction){
+            this.dom = null;
+            this.index = 0;
+            this.x = 0;
+            this.y = 0;
+            this.d = 0;
+            this.direction = direction;
+            this.isMoving = true;
+            this.speed = Math.ceil(Math.random() * 10);
+            this.init();
+            this.bindEvent();
+        }
+        Girl.prototype.init = function(){
+            this.d = - (direction[this.direction] - 1) * 108;
+            this.dom = document.createElement("div");
+            this.dom.setAttribute("class", "girl");
+            this.dom.style.backgroundPosition = "0px " + this.d + "px";
+            if(this.direction.indexOf("left") > -1){
+                this.x = 500;
+            }
+            if(this.direction.indexOf("right") > -1){
+                this.x = 0;
+            }
+            if(this.direction.indexOf("top") > -1){
+                this.y = 500;
+            }
+            if(this.direction.indexOf("bottom") > -1){
+                this.y = 0;
+            }
+            this.dom.style.left = this.x + "px";
+            this.dom.style.top = this.y + "px";
+            document.body.appendChild(this.dom);
+        }
+        Girl.prototype.move = function(){
+            if(!this.isMoving){
+                return;
+            }
+            this.index ++;
+            if(this.index > 7){
+                this.index = 0;
+            }
+            this.dom.style.backgroundPosition = -(this.index + 1) * 79 + "px "
+                + this.d + "px";
+            var speed = this.speed;
+            if(this.direction.indexOf("left") > -1){
+                this.x -= speed;
+                this.x = this.x <= 0 ? 500 : this.x;
+            }
+            if(this.direction.indexOf("right") > -1){
+                this.x += speed;
+                this.x = this.x >= 500 ? 0 : this.x;
+            }
+            if(this.direction.indexOf("bottom") > -1){
+                this.y += speed;
+                this.y = this.y >= 500 ? 0 : this.y;
+            }
+            if(this.direction.indexOf("top") > -1){
+                this.y -= speed;
+                this.y = this.y <= 0 ? 500 : this.y;
+            }
+            this.dom.style.left = this.x + "px";
+            this.dom.style.top = this.y + "px";
+        }
+        Girl.prototype.bindEvent = function(){
+            this.dom.onclick = () => {
+                if(this.isMoving){
+                    this.isMoving = false;
+                } else {
+                    this.isMoving = true;
+                }
+            }
+        }
+        var girl = new Girl("left-top");
+        setInterval(()=>{
+            girl.move();
+        }, 100);
+    </script>
+</body>
+</html>

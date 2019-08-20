@@ -35,6 +35,7 @@
 |SqlAutoGen|动态生成sql
 |SwitchPic|图片切换
 |SwitchPicAuto|图片自动切换
+|WalkingGirl|行走的女孩
 ## HTML
 |xxx.html|内容
 |:-|:-:|
@@ -60,18 +61,20 @@
 |DomOffset|DOM偏移量属性
 |DomOper|DOM操作
 |DomStruct|DOM结构
-|ElementAttribute|节点属性操作
+|DomAttribute|节点属性操作
 |ES6|ES6特性
 |Event|事件
 |EventFlow|事件流
 |EventObj|事件对象
 |EventPrevent|阻止事件
+|Extend|继承
 |Func|函数
 |LogicOper|逻辑运算符
 |Math|数学对象
 |Object|对象
 |OOP|面向对象
 |Operator|运算符
+|PreCompile|预解析
 |Proto|原型
 |String|字符串
 |This|this关键字

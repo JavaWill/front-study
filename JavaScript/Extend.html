@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Human(name, age){
+            this.name = name;
+            this.age = age;
+            this.getName = function(){
+                return this.name;
+            }
+        }
+        Human.prototype.sayHello = function(){
+            alert(`${this.name} say hello`);
+        }
+
+        function Man(name, age){
+            // 构造函数继承
+            Human.call(this, name, age);
+            this.gender = "man";
+        }
+        Man.prototype = Human.prototype; // 这么写不好
+        Man.prototype.constructor = Man; // Human的构造函数也被改变成Man
+
+        function Woman(name, age){
+            Human.call(this, name, age);
+            this.gender = "woman";
+        }
+        Woman.prototype = new Human();
+        Woman.prototype.constructor = Woman;
+
+        var man = new Man("wmj", 23);
+        console.log(man);
+        man.sayHello();
+        
+        var woman = new Woman();
+        console.log(woman);
+
+        console.log(man instanceof Human, man.__proto__ == Human.prototype);
+        console.log(woman instanceof Human, woman.__proto__.__proto__ == Human.prototype);
+
+    </script>
+</body>
+</html>

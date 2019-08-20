@@ -9,13 +9,14 @@
 <body>
     <script>
         function getMax(a, b){
-            console.log(arguments); // 类数组对象
-            console.log(arguments.length); // 实参个数
-            console.log(arguments.callee.length); // 形参个数
+            console.log(arguments); // 类数组对象，实参
+            console.log(arguments.length); // 3 实参个数
+            console.log(arguments.callee.length); // 2 形参个数 callee == getMax
             return a > b ? a : b; // 返回值 结束函数调用
             console.log("over");
         }
         getMax(2, 3, 4);
+
 
         var obj = {};
         obj[0] = "0"; // 0 -> "0" ?

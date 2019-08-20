@@ -56,10 +56,10 @@
         }
 
         function fn(){
-            console.log(this);
+            console.log(this instanceof Array);
         }
         var arr = [fn, 1, 2, 3];
-        arr[0]();
+        arr[0](); // true
 
         var numArr = [2, 3, 1, 4];
         console.log(Math.min(numArr)); // NaN
