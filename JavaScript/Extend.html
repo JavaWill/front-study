@@ -31,7 +31,7 @@
             Human.call(this, name, age);
             this.gender = "woman";
         }
-        Woman.prototype = new Human();
+        Woman.prototype = new Human(); // 原型继承
         Woman.prototype.constructor = Woman;
 
         var man = new Man("wmj", 23);

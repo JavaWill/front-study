@@ -91,6 +91,17 @@
                 他们的__proto__都指向函数对象的prototype，类似于JAVA中“访问类的静态成员”
             5，头都要炸了。。
         */
+
+        let oldMethod = Array.prototype.forEach;
+        Array.prototype.forEach = function(callback){
+            oldMethod.call(this, callback);
+            // oldMethod(callback); // Array.prototype.forEach called on null or undefined
+            console.log("....");
+        }
+        var arr = [2,3,5];
+        arr.forEach(function(value, index){
+            console.log(value);
+        });
         
     </script>
 </head>

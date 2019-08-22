@@ -119,6 +119,44 @@
         // 对象键值数组
         console.log(Object.keys(obj_1)); // ["a", "b", "c", "d"]
         console.log(Object.values(obj_1)); // ["a", "b", "c", {name: "d_d"}]
+
+        // 类
+        class Dog{
+            constructor({name, age}){
+                this.name = name;
+                this.age = age;
+            }
+            getName(){
+                console.log(this.name);
+            }
+            get _age(){
+                return this.age;
+            }
+            set _age(age){
+                this.age = age;
+            }
+            static eat(){
+                console.log("eating...");
+            }
+        }
+        var dog = new Dog({name: "david", age: 12});
+        dog.getName(); // david
+        console.log(dog._age); // 12
+        dog._age = 11;
+        console.log(dog._age); // 11
+        Dog.eat(); // eating...
+        // dog.eat(); //  dog.eat is not a function
+
+        class BigDog extends Dog{
+            constructor({name, age}){
+                super({name, age});
+            }
+        }
+        var bDog = new BigDog({name: "bigDog", age: 30});
+        console.log(bDog); // BigDog {name: "bigDog", age: 30}
+        bDog._age = 33;
+        console.log(bDog._age); // 33
+        BigDog.eat(); // eating...
     </script>
 </body>
 </html>
